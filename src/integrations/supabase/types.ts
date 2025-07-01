@@ -167,6 +167,114 @@ export type Database = {
         }
         Relationships: []
       }
+      guest_reviews: {
+        Row: {
+          created_at: string
+          email: string | null
+          guest_name: string
+          id: string
+          image_url: string | null
+          is_approved: boolean | null
+          rating: number
+          review_text: string
+        }
+        Insert: {
+          created_at?: string
+          email?: string | null
+          guest_name: string
+          id?: string
+          image_url?: string | null
+          is_approved?: boolean | null
+          rating: number
+          review_text: string
+        }
+        Update: {
+          created_at?: string
+          email?: string | null
+          guest_name?: string
+          id?: string
+          image_url?: string | null
+          is_approved?: boolean | null
+          rating?: number
+          review_text?: string
+        }
+        Relationships: []
+      }
+      hotel_rooms: {
+        Row: {
+          created_at: string
+          description: string | null
+          id: string
+          is_available: boolean | null
+          price: number
+          room_type: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          is_available?: boolean | null
+          price: number
+          room_type: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          is_available?: boolean | null
+          price?: number
+          room_type?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      menu_items: {
+        Row: {
+          additional_info: string | null
+          alcohol_percentage: string | null
+          category: string
+          created_at: string
+          description: string | null
+          id: string
+          is_available: boolean | null
+          name: string
+          price: number
+          sort_order: number | null
+          updated_at: string
+          volume: string | null
+        }
+        Insert: {
+          additional_info?: string | null
+          alcohol_percentage?: string | null
+          category: string
+          created_at?: string
+          description?: string | null
+          id?: string
+          is_available?: boolean | null
+          name: string
+          price: number
+          sort_order?: number | null
+          updated_at?: string
+          volume?: string | null
+        }
+        Update: {
+          additional_info?: string | null
+          alcohol_percentage?: string | null
+          category?: string
+          created_at?: string
+          description?: string | null
+          id?: string
+          is_available?: boolean | null
+          name?: string
+          price?: number
+          sort_order?: number | null
+          updated_at?: string
+          volume?: string | null
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           avatar_url: string | null
@@ -191,6 +299,57 @@ export type Database = {
           full_name?: string | null
           id?: string
           updated_at?: string | null
+        }
+        Relationships: []
+      }
+      restaurant_images: {
+        Row: {
+          caption: string | null
+          category: string | null
+          created_at: string
+          id: string
+          image_url: string
+          is_active: boolean | null
+          uploaded_by: string | null
+        }
+        Insert: {
+          caption?: string | null
+          category?: string | null
+          created_at?: string
+          id?: string
+          image_url: string
+          is_active?: boolean | null
+          uploaded_by?: string | null
+        }
+        Update: {
+          caption?: string | null
+          category?: string | null
+          created_at?: string
+          id?: string
+          image_url?: string
+          is_active?: boolean | null
+          uploaded_by?: string | null
+        }
+        Relationships: []
+      }
+      restaurant_info: {
+        Row: {
+          content: string
+          id: string
+          section: string
+          updated_at: string
+        }
+        Insert: {
+          content: string
+          id?: string
+          section: string
+          updated_at?: string
+        }
+        Update: {
+          content?: string
+          id?: string
+          section?: string
+          updated_at?: string
         }
         Relationships: []
       }
