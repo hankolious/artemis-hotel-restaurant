@@ -26,25 +26,30 @@ export const AdminUserManager = () => {
     try {
       setIsLoadingList(true);
       
-      // Get all users with admin role
+      // First get admin user IDs
       const { data: adminRoles, error: rolesError } = await supabase
         .from('user_roles')
-        .select(`
-          user_id,
-          profiles!inner(id, email, full_name, created_at)
-        `)
+        .select('user_id')
         .eq('role', 'admin');
 
       if (rolesError) throw rolesError;
 
-      const admins = adminRoles.map(role => ({
-        id: role.profiles.id,
-        email: role.profiles.email,
-        full_name: role.profiles.full_name,
-        created_at: role.profiles.created_at
-      }));
+      if (!adminRoles || adminRoles.length === 0) {
+        setAdminUsers([]);
+        return;
+      }
 
-      setAdminUsers(admins);
+      const adminUserIds = adminRoles.map(role => role.user_id);
+
+      // Then get profiles for those user IDs
+      const { data: profiles, error: profilesError } = await supabase
+        .from('profiles')
+        .select('id, email, full_name, created_at')
+        .in('id', adminUserIds);
+
+      if (profilesError) throw profilesError;
+
+      setAdminUsers(profiles || []);
     } catch (error: any) {
       console.error('Error fetching admin users:', error);
       toast({
@@ -70,7 +75,8 @@ export const AdminUserManager = () => {
     try {
       setIsLoading(true);
 
-      const { data, error } = await supabase.rpc('add_admin_role', {
+      // Call the function using the rpc method with proper typing
+      const { data, error } = await supabase.rpc('add_admin_role' as any, {
         _user_email: newAdminEmail.trim()
       });
 
@@ -104,7 +110,8 @@ export const AdminUserManager = () => {
 
   const removeAdminRole = async (email: string) => {
     try {
-      const { data, error } = await supabase.rpc('remove_admin_role', {
+      // Call the function using the rpc method with proper typing
+      const { data, error } = await supabase.rpc('remove_admin_role' as any, {
         _user_email: email
       });
 
