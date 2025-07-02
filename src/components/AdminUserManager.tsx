@@ -75,8 +75,8 @@ export const AdminUserManager = () => {
     try {
       setIsLoading(true);
 
-      // Call the function using the rpc method with proper typing
-      const { data, error } = await supabase.rpc('add_admin_role' as any, {
+      // Call the function using the rpc method
+      const { data, error } = await supabase.rpc('add_admin_role', {
         _user_email: newAdminEmail.trim()
       });
 
@@ -110,8 +110,8 @@ export const AdminUserManager = () => {
 
   const removeAdminRole = async (email: string) => {
     try {
-      // Call the function using the rpc method with proper typing
-      const { data, error } = await supabase.rpc('remove_admin_role' as any, {
+      // Call the function using the rpc method
+      const { data, error } = await supabase.rpc('remove_admin_role', {
         _user_email: email
       });
 
@@ -145,17 +145,17 @@ export const AdminUserManager = () => {
   }, []);
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4 md:space-y-6">
       <Card>
         <CardHeader>
-          <CardTitle className="text-blue-900 flex items-center">
-            <UserPlus className="w-5 h-5 mr-2" />
+          <CardTitle className="text-blue-900 flex items-center text-lg md:text-xl">
+            <UserPlus className="w-4 h-4 md:w-5 md:h-5 mr-2" />
             Neuen Admin hinzufügen
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="space-y-2">
-            <Label htmlFor="adminEmail">E-Mail-Adresse des Benutzers</Label>
+            <Label htmlFor="adminEmail" className="text-sm md:text-base">E-Mail-Adresse des Benutzers</Label>
             <Input
               id="adminEmail"
               type="email"
@@ -168,7 +168,7 @@ export const AdminUserManager = () => {
           <Button 
             onClick={addAdminRole}
             disabled={isLoading}
-            className="bg-blue-600 hover:bg-blue-700"
+            className="w-full md:w-auto bg-blue-600 hover:bg-blue-700"
           >
             {isLoading ? "Hinzufügen..." : "Admin-Rolle hinzufügen"}
           </Button>
@@ -177,25 +177,25 @@ export const AdminUserManager = () => {
 
       <Card>
         <CardHeader>
-          <CardTitle className="text-blue-900 flex items-center">
-            <Users className="w-5 h-5 mr-2" />
+          <CardTitle className="text-blue-900 flex items-center text-lg md:text-xl">
+            <Users className="w-4 h-4 md:w-5 md:h-5 mr-2" />
             Aktuelle Admins ({adminUsers.length})
           </CardTitle>
         </CardHeader>
         <CardContent>
           {isLoadingList ? (
-            <p className="text-gray-500">Lade Admin-Benutzer...</p>
+            <p className="text-gray-500 text-sm md:text-base">Lade Admin-Benutzer...</p>
           ) : adminUsers.length === 0 ? (
-            <p className="text-gray-500">Keine Admin-Benutzer gefunden.</p>
+            <p className="text-gray-500 text-sm md:text-base">Keine Admin-Benutzer gefunden.</p>
           ) : (
             <div className="space-y-3">
               {adminUsers.map((admin) => (
                 <div 
                   key={admin.id}
-                  className="flex items-center justify-between p-4 border border-blue-200 rounded-lg"
+                  className="flex flex-col md:flex-row md:items-center justify-between p-3 md:p-4 border border-blue-200 rounded-lg space-y-2 md:space-y-0"
                 >
-                  <div>
-                    <p className="font-medium text-blue-900">{admin.email}</p>
+                  <div className="flex-1">
+                    <p className="font-medium text-blue-900 text-sm md:text-base">{admin.email}</p>
                     {admin.full_name && (
                       <p className="text-sm text-gray-600">{admin.full_name}</p>
                     )}
@@ -207,7 +207,7 @@ export const AdminUserManager = () => {
                     variant="outline"
                     size="sm"
                     onClick={() => removeAdminRole(admin.email)}
-                    className="text-red-600 border-red-300 hover:bg-red-50"
+                    className="text-red-600 border-red-300 hover:bg-red-50 w-full md:w-auto"
                   >
                     <UserMinus className="w-4 h-4 mr-1" />
                     Entfernen

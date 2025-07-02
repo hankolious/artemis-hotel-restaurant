@@ -36,11 +36,11 @@ export const AdminPanel = ({ onClose }: AdminPanelProps) => {
   }
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-      <div className="bg-white rounded-lg w-full max-w-6xl max-h-[90vh] overflow-hidden">
-        <div className="flex items-center justify-between p-6 border-b border-blue-200">
-          <h2 className="text-2xl font-bold text-blue-900 flex items-center">
-            <Settings className="w-6 h-6 mr-2" />
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-2 md:p-4">
+      <div className="bg-white rounded-lg w-full max-w-7xl max-h-[95vh] overflow-hidden">
+        <div className="flex items-center justify-between p-4 md:p-6 border-b border-blue-200">
+          <h2 className="text-xl md:text-2xl font-bold text-blue-900 flex items-center">
+            <Settings className="w-5 h-5 md:w-6 md:h-6 mr-2" />
             Admin Panel
           </h2>
           <Button 
@@ -49,68 +49,90 @@ export const AdminPanel = ({ onClose }: AdminPanelProps) => {
             onClick={onClose}
             className="text-blue-600 hover:text-blue-800"
           >
-            <X className="w-5 h-5" />
+            <X className="w-4 h-4 md:w-5 md:h-5" />
           </Button>
         </div>
 
-        <div className="p-6 overflow-y-auto max-h-[calc(90vh-5rem)]">
+        <div className="p-2 md:p-6 overflow-y-auto max-h-[calc(95vh-5rem)]">
           <Tabs defaultValue="menu" className="w-full">
-            <TabsList className="grid w-full grid-cols-7 mb-6">
-              <TabsTrigger value="menu" className="flex items-center">
-                <Utensils className="w-4 h-4 mr-2" />
-                Menü
+            {/* Mobile-friendly tab layout */}
+            <TabsList className="grid w-full grid-cols-2 md:grid-cols-7 gap-1 h-auto p-1 bg-blue-50 mb-4 md:mb-6">
+              <TabsTrigger 
+                value="menu" 
+                className="flex flex-col md:flex-row items-center text-xs md:text-sm p-2 md:p-3 data-[state=active]:bg-blue-600 data-[state=active]:text-white"
+              >
+                <Utensils className="w-4 h-4 mb-1 md:mb-0 md:mr-2" />
+                <span className="hidden sm:block">Menü</span>
               </TabsTrigger>
-              <TabsTrigger value="hotel" className="flex items-center">
-                <Users className="w-4 h-4 mr-2" />
-                Hotel
+              <TabsTrigger 
+                value="hotel" 
+                className="flex flex-col md:flex-row items-center text-xs md:text-sm p-2 md:p-3 data-[state=active]:bg-blue-600 data-[state=active]:text-white"
+              >
+                <Users className="w-4 h-4 mb-1 md:mb-0 md:mr-2" />
+                <span className="hidden sm:block">Hotel</span>
               </TabsTrigger>
-              <TabsTrigger value="events" className="flex items-center">
-                <Calendar className="w-4 h-4 mr-2" />
-                Events
+              <TabsTrigger 
+                value="events" 
+                className="flex flex-col md:flex-row items-center text-xs md:text-sm p-2 md:p-3 data-[state=active]:bg-blue-600 data-[state=active]:text-white"
+              >
+                <Calendar className="w-4 h-4 mb-1 md:mb-0 md:mr-2" />
+                <span className="hidden sm:block">Events</span>
               </TabsTrigger>
-              <TabsTrigger value="reviews" className="flex items-center">
-                <MessageSquare className="w-4 h-4 mr-2" />
-                Bewertungen
+              <TabsTrigger 
+                value="reviews" 
+                className="flex flex-col md:flex-row items-center text-xs md:text-sm p-2 md:p-3 data-[state=active]:bg-blue-600 data-[state=active]:text-white"
+              >
+                <MessageSquare className="w-4 h-4 mb-1 md:mb-0 md:mr-2" />
+                <span className="hidden sm:block">Reviews</span>
               </TabsTrigger>
-              <TabsTrigger value="images" className="flex items-center">
-                <Image className="w-4 h-4 mr-2" />
-                Bilder
+              <TabsTrigger 
+                value="images" 
+                className="flex flex-col md:flex-row items-center text-xs md:text-sm p-2 md:p-3 data-[state=active]:bg-blue-600 data-[state=active]:text-white"
+              >
+                <Image className="w-4 h-4 mb-1 md:mb-0 md:mr-2" />
+                <span className="hidden sm:block">Bilder</span>
               </TabsTrigger>
-              <TabsTrigger value="design" className="flex items-center">
-                <Palette className="w-4 h-4 mr-2" />
-                Design
+              <TabsTrigger 
+                value="design" 
+                className="flex flex-col md:flex-row items-center text-xs md:text-sm p-2 md:p-3 data-[state=active]:bg-blue-600 data-[state=active]:text-white"
+              >
+                <Palette className="w-4 h-4 mb-1 md:mb-0 md:mr-2" />
+                <span className="hidden sm:block">Design</span>
               </TabsTrigger>
-              <TabsTrigger value="admins" className="flex items-center">
-                <UserCog className="w-4 h-4 mr-2" />
-                Admins
+              <TabsTrigger 
+                value="admins" 
+                className="flex flex-col md:flex-row items-center text-xs md:text-sm p-2 md:p-3 data-[state=active]:bg-blue-600 data-[state=active]:text-white"
+              >
+                <UserCog className="w-4 h-4 mb-1 md:mb-0 md:mr-2" />
+                <span className="hidden sm:block">Admins</span>
               </TabsTrigger>
             </TabsList>
 
-            <TabsContent value="menu">
+            <TabsContent value="menu" className="mt-0">
               <MenuItemsManager />
             </TabsContent>
 
-            <TabsContent value="hotel">
+            <TabsContent value="hotel" className="mt-0">
               <HotelRoomsManager />
             </TabsContent>
 
-            <TabsContent value="events">
+            <TabsContent value="events" className="mt-0">
               <SpecialEventsManager />
             </TabsContent>
 
-            <TabsContent value="reviews">
+            <TabsContent value="reviews" className="mt-0">
               <ReviewsManager />
             </TabsContent>
 
-            <TabsContent value="images">
+            <TabsContent value="images" className="mt-0">
               <ImagesManager />
             </TabsContent>
 
-            <TabsContent value="design">
+            <TabsContent value="design" className="mt-0">
               <DesignSettingsManager />
             </TabsContent>
 
-            <TabsContent value="admins">
+            <TabsContent value="admins" className="mt-0">
               <AdminUserManager />
             </TabsContent>
           </Tabs>

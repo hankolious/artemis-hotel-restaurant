@@ -502,6 +502,10 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      add_admin_role: {
+        Args: { _user_email: string }
+        Returns: boolean
+      }
       has_role: {
         Args: {
           _user_id: string
@@ -512,6 +516,10 @@ export type Database = {
       promote_first_admin: {
         Args: Record<PropertyKey, never>
         Returns: undefined
+      }
+      remove_admin_role: {
+        Args: { _user_email: string }
+        Returns: boolean
       }
     }
     Enums: {
