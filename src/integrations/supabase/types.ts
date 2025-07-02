@@ -353,6 +353,60 @@ export type Database = {
         }
         Relationships: []
       }
+      special_events: {
+        Row: {
+          booking_phone: string | null
+          created_at: string
+          current_participants: number | null
+          description: string | null
+          end_time: string | null
+          event_date: string | null
+          id: string
+          image_url: string | null
+          is_active: boolean | null
+          max_participants: number | null
+          price: number | null
+          requires_booking: boolean | null
+          start_time: string | null
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          booking_phone?: string | null
+          created_at?: string
+          current_participants?: number | null
+          description?: string | null
+          end_time?: string | null
+          event_date?: string | null
+          id?: string
+          image_url?: string | null
+          is_active?: boolean | null
+          max_participants?: number | null
+          price?: number | null
+          requires_booking?: boolean | null
+          start_time?: string | null
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          booking_phone?: string | null
+          created_at?: string
+          current_participants?: number | null
+          description?: string | null
+          end_time?: string | null
+          event_date?: string | null
+          id?: string
+          image_url?: string | null
+          is_active?: boolean | null
+          max_participants?: number | null
+          price?: number | null
+          requires_booking?: boolean | null
+          start_time?: string | null
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       subscriptions: {
         Row: {
           created_at: string | null
@@ -410,6 +464,36 @@ export type Database = {
           id?: string
           role?: Database["public"]["Enums"]["user_role"]
           user_id?: string
+        }
+        Relationships: []
+      }
+      website_settings: {
+        Row: {
+          category: string
+          display_name: string
+          id: string
+          setting_key: string
+          setting_type: string
+          setting_value: string
+          updated_at: string
+        }
+        Insert: {
+          category?: string
+          display_name: string
+          id?: string
+          setting_key: string
+          setting_type?: string
+          setting_value: string
+          updated_at?: string
+        }
+        Update: {
+          category?: string
+          display_name?: string
+          id?: string
+          setting_key?: string
+          setting_type?: string
+          setting_value?: string
+          updated_at?: string
         }
         Relationships: []
       }

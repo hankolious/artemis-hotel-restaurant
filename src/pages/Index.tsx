@@ -3,11 +3,12 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
-import { MapPin, Phone, Clock, Star, Camera, Users, Utensils } from "lucide-react";
+import { MapPin, Phone, Clock, Star, Camera, Users, Utensils, Calendar } from "lucide-react";
 import { GuestReviewForm } from "@/components/GuestReviewForm";
 import { LocationMap } from "@/components/LocationMap";
 import { AdminPanel } from "@/components/AdminPanel";
 import { GuestReviews } from "@/components/GuestReviews";
+import { SpecialEventsDisplay } from "@/components/SpecialEventsDisplay";
 
 const Index = () => {
   const [selectedTab, setSelectedTab] = useState("restaurant");
@@ -65,7 +66,7 @@ const Index = () => {
       <nav className="bg-blue-800 text-white shadow-lg">
         <div className="container mx-auto px-4">
           <Tabs value={selectedTab} onValueChange={setSelectedTab} className="w-full">
-            <TabsList className="grid w-full grid-cols-5 bg-blue-800 rounded-none border-b-2 border-blue-600">
+            <TabsList className="grid w-full grid-cols-6 bg-blue-800 rounded-none border-b-2 border-blue-600">
               <TabsTrigger 
                 value="restaurant" 
                 className="text-white data-[state=active]:bg-blue-600 data-[state=active]:text-white py-3 font-medium"
@@ -79,6 +80,13 @@ const Index = () => {
               >
                 <Users className="w-4 h-4 mr-2" />
                 Hotel
+              </TabsTrigger>
+              <TabsTrigger 
+                value="events" 
+                className="text-white data-[state=active]:bg-blue-600 data-[state=active]:text-white py-3 font-medium"
+              >
+                <Calendar className="w-4 h-4 mr-2" />
+                Events
               </TabsTrigger>
               <TabsTrigger 
                 value="location" 
@@ -280,6 +288,11 @@ const Index = () => {
                   </CardContent>
                 </Card>
               </div>
+            </TabsContent>
+
+            {/* Special Events Tab */}
+            <TabsContent value="events" className="mt-8">
+              <SpecialEventsDisplay />
             </TabsContent>
 
             {/* Location Tab */}
