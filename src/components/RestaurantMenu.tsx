@@ -194,22 +194,22 @@ export const RestaurantMenu = () => {
         { id: "200", name: "Frisches Lachsfilet gegrillt", price: "16,50 €", description: "mit Gemüse Reis und Broccoli und Salat mit Hausdressing" },
         { id: "201", name: "Frisches Zanderfilet gebraten", price: "16,50 €", description: "mit Gemüse Reis und Broccoli und Salat mit Hausdressing" },
         { id: "202", name: "Lamm Karre", price: "20,90 €", description: "mit Knoblauchkartoffeln und Salat mit Hausdressing" },
-        { id: "203", name: "Lammfiles", price: "19,50 €", description: "mit Kräuterbutter und Knoblauchkartoffeln und Salat mit Hausdressing" },
+        { id: "203", name: "Lammfilet", price: "19,50 €", description: "mit Kräuterbutter und Knoblauchkartoffeln und Salat mit Hausdressing" },
         { id: "204", name: "Lammspieß", price: "16,90 €", description: "mit Kräuterbutter und Knoblauchkartoffeln und Salat mit Hausdressing" },
-        { id: "205", name: "Biftekti", price: "14,50 €", description: "gefülltes Hacksteak mit Schafskäse, dazu Pommes Frites und Salat mit Hausdressing" },
+        { id: "205", name: "Bifteki", price: "14,50 €", description: "gefülltes Hacksteak mit Schafskäse, dazu Pommes Frites und Salat mit Hausdressing" },
         { id: "206", name: "Hähnchenbrustfilet gegrillt", price: "14,90 €", description: "mit Metaxsauce und Edamer überbacken, Pommes Frites und Salat mit Hausdressing" },
         { id: "207", name: "Schweinefilet Medaillons", price: "17,90 €", description: "mit Sauce béarnaise mit geriebenen Schafskäse und Tomatenscheiben überbacken, dazu Kartoffelscheiben und Salat mit Hausdressing" },
         { id: "208", name: "Gyros", price: "15,50 €", description: "mit Metaxasauce und Edamer überbacken, Pommes Frites und Salat mit Hausdressing" },
         { id: "209", name: "Schweinesteaks", price: "15,50 €", description: "mit Metaxasauce und Edamer überbacken, Pommes Frites und Salat mit Hausdressing" },
         { id: "212", name: "Kalbsleber aus der Pfanne", price: "16,90 €", description: "Frische Champignons mit Zwiebeln, Kartoffelscheiben und Salat mit Hausdressing" },
-        { id: "213", name: "Gyros mit Zaziki", price: "14,50 €", description: "mit Knoblauchkartoffeln und Salat mit Hausdressing" }
+        { id: "213", name: "Gyros mit Tzatziki", price: "14,50 €", description: "mit Knoblauchkartoffeln und Salat mit Hausdressing" }
       ]
     },
     {
       title: "Warme Getränke",
       items: [
         { id: "100", name: "Espresso", price: "3,50 €" },
-        { id: "101", name: "Double Spresso", price: "5,50 €" },
+        { id: "101", name: "Double Espresso", price: "5,50 €" },
         { id: "102", name: "griechischer Mocca", price: "4,00 €" },
         { id: "103", name: "Cappuccino", price: "3,00 €" },
         { id: "104", name: "Milchkaffee", price: "3,70 €" },
@@ -219,7 +219,7 @@ export const RestaurantMenu = () => {
       ]
     },
     {
-      title: "Alkoholfrei Getränke",
+      title: "Alkoholfreie Getränke",
       items: [
         { name: "Gerolsteiner Sprudel 0,25l", price: "3,00 €" },
         { name: "Gerolsteiner Sprudel 0,75l", price: "6,50 €" },
@@ -245,8 +245,8 @@ export const RestaurantMenu = () => {
         { name: "Apfelsaft 0,4l", price: "4,20 €" },
         { name: "Apfelschorle 0,2l", price: "2,50 €" },
         { name: "Apfelschorle 0,4l", price: "4,20 €" },
-        { name: "Kirchsaft / Bananesaft 0,2l", price: "2,80 €" },
-        { name: "Kirchsaft / Bananesaft 0,4l", price: "4,20 €" },
+        { name: "Kirschsaft / Bananensaft 0,2l", price: "2,80 €" },
+        { name: "Kirschsaft / Bananensaft 0,4l", price: "4,20 €" },
         { name: "Kiba 0,2l", price: "2,80 €" },
         { name: "Kiba 0,4l", price: "4,20 €" },
         { name: "Glas Milch 0,2l", price: "1,50 €" }
@@ -268,7 +268,7 @@ export const RestaurantMenu = () => {
       title: "Flaschen Bier",
       items: [
         { name: "Hefeweizen vom Fass 0,5l", price: "4,50 €" },
-        { name: "Benetikiner Alkohlfrei 0,5l", price: "4,20 €" },
+        { name: "Benediktiner Alkoholfrei 0,5l", price: "4,20 €" },
         { name: "Bitburger Alkoholfrei 0,33l", price: "3,00 €" },
         { name: "Malzbier 0,33l", price: "2,50 €" }
       ]
@@ -279,7 +279,7 @@ export const RestaurantMenu = () => {
         { name: "Ouzo 2cl", price: "3,00 €" },
         { name: "Metaxa (5 Sterne) 2cl", price: "4,50 €" },
         { name: "Metaxa Grande Fine 2cl", price: "6,50 €" },
-        { name: "Bailey´s 4cl", price: "5,50 €" },
+        { name: "Bailey's 4cl", price: "5,50 €" },
         { name: "Korn 2cl", price: "3,00 €" },
         { name: "Jägermeister 2cl", price: "4,00 €" },
         { name: "Williams Birne 2cl", price: "4,00 €" },
@@ -288,10 +288,10 @@ export const RestaurantMenu = () => {
         { name: "Whiskey 4cl", price: "7,50 €" },
         { name: "Ramazotti 2cl", price: "4,00 €" },
         { name: "Longdrinks 4cl", price: "7,50 €", description: "Jack Daniels, Vodka, Bacardi" },
-        { name: "Sekt, Troken 0,75l", price: "21,00 €" },
+        { name: "Sekt, Trocken 0,75l", price: "21,00 €" },
         { name: "Piccolo Flasche 0,2l", price: "5,50 €" },
-        { name: "Prossecco 0,75l", price: "25,00 €" },
-        { name: "Prosseco 0,2l", price: "6,50 €" }
+        { name: "Prosecco 0,75l", price: "25,00 €" },
+        { name: "Prosecco 0,2l", price: "6,50 €" }
       ]
     },
     {
@@ -321,7 +321,7 @@ export const RestaurantMenu = () => {
         { name: "Rieslingschorle 0,25l", price: "3,00 €" },
         { name: "Rieslingschorle 0,5l", price: "4,90 €" },
         { name: "Riesling Trocken 0,25l", price: "4,20 €" },
-        { name: "Weissherbst 0,25l", price: "4,20 €" }
+        { name: "Weißherbst 0,25l", price: "4,20 €" }
       ]
     },
     {
@@ -331,7 +331,7 @@ export const RestaurantMenu = () => {
         { name: "Biblia chora Weiß 0,75l", price: "31,90 €" },
         { name: "Biblia chora Rose 0,75l", price: "29,90 €" },
         { name: "Lafkiotis Agionymose 0,75l", price: "30,90 €" },
-        { name: "Riesiling 1,0l", price: "18,50 €" },
+        { name: "Riesling 1,0l", price: "18,50 €" },
         { name: "Weißherbst 1,0l", price: "18,50 €" }
       ]
     }
@@ -340,37 +340,37 @@ export const RestaurantMenu = () => {
   return (
     <div className="container mx-auto px-4 pb-8">
       <div className="text-center mb-8">
-        <h2 className="text-2xl md:text-3xl font-bold text-blue-900 mb-4" style={{ fontFamily: 'serif' }}>
+        <h2 className="text-xl md:text-3xl font-bold text-blue-900 mb-4" style={{ fontFamily: 'serif' }}>
           UNSERE KARTE
         </h2>
-        <p className="text-blue-700 max-w-2xl mx-auto text-sm md:text-base">
+        <p className="text-blue-700 max-w-2xl mx-auto text-xs md:text-base">
           Genießen Sie authentische griechische Küche in unserem traditionellen Restaurant. 
           Alle Gerichte werden frisch zubereitet mit den besten Zutaten.
         </p>
       </div>
 
-      <div className="grid gap-6 md:gap-8">
+      <div className="grid gap-4 md:gap-8">
         {menuCategories.map((category, index) => (
           <Card key={index} className="border-2 border-blue-200 shadow-lg">
             <CardHeader className="bg-gradient-to-r from-blue-100 to-blue-50">
-              <CardTitle className="text-lg md:text-2xl text-blue-900" style={{ fontFamily: 'serif' }}>
+              <CardTitle className="text-sm md:text-2xl text-blue-900" style={{ fontFamily: 'serif' }}>
                 {category.title}
               </CardTitle>
             </CardHeader>
-            <CardContent className="p-4 md:p-6">
-              <div className="grid gap-3 md:gap-4">
+            <CardContent className="p-3 md:p-6">
+              <div className="grid gap-2 md:gap-4">
                 {category.items.map((item, itemIndex) => (
                   <div key={itemIndex} className="flex justify-between items-start border-b border-blue-100 pb-2 last:border-b-0 last:pb-0">
                     <div className="flex-1 pr-2">
-                      <h4 className="font-semibold text-blue-900 text-sm md:text-base">
+                      <h4 className="font-semibold text-blue-900 text-xs md:text-base">
                         {item.id && <span className="text-blue-600 mr-2">{item.id}</span>}
                         {item.name}
                       </h4>
                       {item.description && (
-                        <p className="text-xs md:text-sm text-blue-600 mt-1">{item.description}</p>
+                        <p className="text-[10px] md:text-sm text-blue-600 mt-1">{item.description}</p>
                       )}
                     </div>
-                    <Badge variant="secondary" className="bg-blue-100 text-blue-800 text-xs md:text-sm shrink-0">
+                    <Badge variant="secondary" className="bg-blue-100 text-blue-800 text-[10px] md:text-sm shrink-0">
                       {item.price}
                     </Badge>
                   </div>
