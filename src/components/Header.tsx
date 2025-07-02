@@ -1,17 +1,26 @@
 
 import { Button } from "@/components/ui/button";
+import { useWebsiteSettings } from "@/hooks/useWebsiteSettings";
 
 interface HeaderProps {
   onShowAdminPanel: () => void;
 }
 
 export const Header = ({ onShowAdminPanel }: HeaderProps) => {
+  const { settings } = useWebsiteSettings();
+  
   const handlePhoneClick = () => {
     window.location.href = "tel:+4963539322070";
   };
 
   return (
-    <header className="relative z-10 bg-white/90 backdrop-blur-sm shadow-lg border-b-4 border-blue-600">
+    <header 
+      className="relative z-10 bg-white/90 backdrop-blur-sm shadow-lg border-b-4"
+      style={{ 
+        borderBottomColor: settings.primary_color || '#1e40af',
+        backgroundColor: settings.background_color ? `${settings.background_color}E6` : undefined
+      }}
+    >
       <div className="container mx-auto px-4 py-6">
         <div className="flex items-center justify-between">
           {/* Mobile Admin Button - Top Left */}
@@ -20,7 +29,7 @@ export const Header = ({ onShowAdminPanel }: HeaderProps) => {
               variant="outline" 
               size="sm"
               onClick={onShowAdminPanel}
-              className="text-blue-700 border-blue-300 hover:bg-blue-50"
+              className="border-primary-dynamic text-primary-dynamic hover:bg-primary-dynamic hover:text-white"
             >
               Admin
             </Button>
@@ -28,15 +37,26 @@ export const Header = ({ onShowAdminPanel }: HeaderProps) => {
 
           <div className="flex items-center space-x-4 flex-1 md:flex-none">
             <img 
-              src="/placeholder.svg" 
+              src={settings.logo_url || "/placeholder.svg"} 
               alt="Artemis Restaurant Logo" 
               className="h-12 w-12 md:h-16 md:w-16 object-contain"
             />
             <div className="text-center md:text-left">
-              <h1 className="text-2xl md:text-4xl font-bold text-blue-900" style={{ fontFamily: 'serif' }}>
-                ARTEMIS
+              <h1 
+                className="text-2xl md:text-4xl font-bold"
+                style={{ 
+                  fontFamily: `var(--header-font), serif`,
+                  color: settings.primary_color || '#1e40af'
+                }}
+              >
+                {settings.site_title || 'ARTEMIS'}
               </h1>
-              <p className="text-blue-700 text-xs md:text-sm font-medium">Griechisches Restaurant & Hotel</p>
+              <p 
+                className="text-xs md:text-sm font-medium"
+                style={{ color: settings.secondary_color || '#3b82f6' }}
+              >
+                {settings.site_subtitle || 'Griechisches Restaurant & Hotel'}
+              </p>
             </div>
           </div>
 
@@ -46,25 +66,30 @@ export const Header = ({ onShowAdminPanel }: HeaderProps) => {
               <Button 
                 variant="outline" 
                 onClick={onShowAdminPanel}
-                className="text-blue-700 border-blue-300 hover:bg-blue-50"
+                className="border-primary-dynamic text-primary-dynamic hover:bg-primary-dynamic hover:text-white"
               >
                 Admin
               </Button>
             </div>
             
-            <div className="text-right text-blue-800">
+            <div 
+              className="text-right"
+              style={{ color: settings.text_color || '#1e293b' }}
+            >
               <p className="text-xs md:text-sm font-medium">Am Nussbaum 6</p>
               <p className="text-xs md:text-sm">67273 Weisenheim am Berg</p>
               <p 
-                className="text-xs md:text-sm font-semibold cursor-pointer hover:text-blue-600 transition-colors"
+                className="text-xs md:text-sm font-semibold cursor-pointer hover:opacity-80 transition-opacity"
                 onClick={handlePhoneClick}
                 title="Jetzt anrufen"
+                style={{ color: settings.secondary_color || '#3b82f6' }}
               >
                 ☎ 06353 - 93 220 70
               </p>
               <Button
                 onClick={handlePhoneClick}
-                className="mt-1 md:mt-2 bg-blue-600 hover:bg-blue-700 text-white text-xs px-2 py-1 md:px-3"
+                className="mt-1 md:mt-2 text-white text-xs px-2 py-1 md:px-3 hover:opacity-90"
+                style={{ backgroundColor: settings.primary_color || '#1e40af' }}
               >
                 Buchen
               </Button>

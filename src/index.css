@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -6,9 +7,20 @@
 All colors MUST be HSL.
 */
 
+:root {
+  /* Dynamic color variables that can be overridden */
+  --primary-color: #1e40af;
+  --secondary-color: #3b82f6;
+  --accent-color: #60a5fa;
+  --background-color: #f8fafc;
+  --text-color: #1e293b;
+  --header-font: serif;
+  --body-font: Inter;
+}
+
 @layer base {
   :root {
-    --background: 0 0% 100%;
+    --background: 214 15% 97%;
     --foreground: 222.2 84% 4.9%;
 
     --card: 0 0% 100%;
@@ -17,16 +29,16 @@ All colors MUST be HSL.
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
 
-    --primary: 222.2 47.4% 11.2%;
+    --primary: 221 83% 53%;
     --primary-foreground: 210 40% 98%;
 
-    --secondary: 210 40% 96.1%;
+    --secondary: 214 32% 91%;
     --secondary-foreground: 222.2 47.4% 11.2%;
 
-    --muted: 210 40% 96.1%;
+    --muted: 214 32% 91%;
     --muted-foreground: 215.4 16.3% 46.9%;
 
-    --accent: 210 40% 96.1%;
+    --accent: 214 32% 91%;
     --accent-foreground: 222.2 47.4% 11.2%;
 
     --destructive: 0 84.2% 60.2%;
@@ -34,24 +46,17 @@ All colors MUST be HSL.
 
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --ring: 221 83% 53%;
 
     --radius: 0.5rem;
 
     --sidebar-background: 0 0% 98%;
-
     --sidebar-foreground: 240 5.3% 26.1%;
-
     --sidebar-primary: 240 5.9% 10%;
-
     --sidebar-primary-foreground: 0 0% 98%;
-
     --sidebar-accent: 240 4.8% 95.9%;
-
     --sidebar-accent-foreground: 240 5.9% 10%;
-
     --sidebar-border: 220 13% 91%;
-
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
 
@@ -101,5 +106,35 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
+    font-family: var(--body-font), sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--header-font), serif;
+  }
+
+  /* Dynamic color classes */
+  .bg-primary-dynamic {
+    background-color: var(--primary-color);
+  }
+
+  .bg-secondary-dynamic {
+    background-color: var(--secondary-color);
+  }
+
+  .bg-accent-dynamic {
+    background-color: var(--accent-color);
+  }
+
+  .text-primary-dynamic {
+    color: var(--primary-color);
+  }
+
+  .text-secondary-dynamic {
+    color: var(--secondary-color);
+  }
+
+  .border-primary-dynamic {
+    border-color: var(--primary-color);
   }
 }
