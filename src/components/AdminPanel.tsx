@@ -5,7 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { X, Settings, Utensils, Users, Image, MessageSquare, Palette, Calendar } from "lucide-react";
+import { X, Settings, Utensils, Users, Image, MessageSquare, Palette, Calendar, UserCog } from "lucide-react";
 import { AdminAuth } from "./AdminAuth";
 import { MenuItemsManager } from "./MenuItemsManager";
 import { HotelRoomsManager } from "./HotelRoomsManager";
@@ -13,6 +13,7 @@ import { ReviewsManager } from "./ReviewsManager";
 import { ImagesManager } from "./ImagesManager";
 import { DesignSettingsManager } from "./DesignSettingsManager";
 import { SpecialEventsManager } from "./SpecialEventsManager";
+import { AdminUserManager } from "./AdminUserManager";
 
 interface AdminPanelProps {
   onClose: () => void;
@@ -54,7 +55,7 @@ export const AdminPanel = ({ onClose }: AdminPanelProps) => {
 
         <div className="p-6 overflow-y-auto max-h-[calc(90vh-5rem)]">
           <Tabs defaultValue="menu" className="w-full">
-            <TabsList className="grid w-full grid-cols-6 mb-6">
+            <TabsList className="grid w-full grid-cols-7 mb-6">
               <TabsTrigger value="menu" className="flex items-center">
                 <Utensils className="w-4 h-4 mr-2" />
                 Menü
@@ -78,6 +79,10 @@ export const AdminPanel = ({ onClose }: AdminPanelProps) => {
               <TabsTrigger value="design" className="flex items-center">
                 <Palette className="w-4 h-4 mr-2" />
                 Design
+              </TabsTrigger>
+              <TabsTrigger value="admins" className="flex items-center">
+                <UserCog className="w-4 h-4 mr-2" />
+                Admins
               </TabsTrigger>
             </TabsList>
 
@@ -103,6 +108,10 @@ export const AdminPanel = ({ onClose }: AdminPanelProps) => {
 
             <TabsContent value="design">
               <DesignSettingsManager />
+            </TabsContent>
+
+            <TabsContent value="admins">
+              <AdminUserManager />
             </TabsContent>
           </Tabs>
         </div>
