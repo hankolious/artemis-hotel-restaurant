@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -6,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Palette, Type, Image, Settings, Layout, FileImage } from "lucide-react";
+import { Palette, Type, Image, Settings, Layout, FileImage, Share2 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 
@@ -126,31 +125,111 @@ export const DesignSettingsManager = () => {
       </CardHeader>
       <CardContent>
         <Tabs defaultValue="colors" className="w-full">
-          <TabsList className="grid w-full grid-cols-5">
+          <TabsList className="grid w-full grid-cols-6">
             <TabsTrigger value="colors" className="flex items-center">
-              <Palette className="w-4 h-4 mr-2" />
+              <Palette className="w-4 h-4 mr-1" />
               Farben
             </TabsTrigger>
             <TabsTrigger value="typography" className="flex items-center">
-              <Type className="w-4 h-4 mr-2" />
+              <Type className="w-4 h-4 mr-1" />
               Schrift
             </TabsTrigger>
             <TabsTrigger value="branding" className="flex items-center">
-              <Image className="w-4 h-4 mr-2" />
+              <Image className="w-4 h-4 mr-1" />
               Logo
             </TabsTrigger>
             <TabsTrigger value="banner" className="flex items-center">
-              <FileImage className="w-4 h-4 mr-2" />
+              <FileImage className="w-4 h-4 mr-1" />
               Banner
             </TabsTrigger>
             <TabsTrigger value="layout" className="flex items-center">
-              <Layout className="w-4 h-4 mr-2" />
+              <Layout className="w-4 h-4 mr-1" />
               Layout
+            </TabsTrigger>
+            <TabsTrigger value="social" className="flex items-center">
+              <Share2 className="w-4 h-4 mr-1" />
+              Social
             </TabsTrigger>
           </TabsList>
 
           <TabsContent value="colors" className="space-y-4">
             <div className="grid gap-4 md:grid-cols-2">
+              <div className="space-y-2">
+                <Label htmlFor="primary_color">Primärfarbe (Haupttitel)</Label>
+                <div className="flex items-center space-x-2">
+                  <Input
+                    type="color"
+                    value={getSetting('primary_color') || '#1e40af'}
+                    onChange={(e) => updateSetting('primary_color', e.target.value)}
+                    className="w-16 h-10 p-1 border rounded"
+                  />
+                  <Input
+                    type="text"
+                    value={getSetting('primary_color')}
+                    onChange={(e) => updateSetting('primary_color', e.target.value)}
+                    className="flex-1"
+                    placeholder="#1e40af"
+                  />
+                </div>
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="secondary_color">Sekundärfarbe (Untertitel)</Label>
+                <div className="flex items-center space-x-2">
+                  <Input
+                    type="color"
+                    value={getSetting('secondary_color') || '#3b82f6'}
+                    onChange={(e) => updateSetting('secondary_color', e.target.value)}
+                    className="w-16 h-10 p-1 border rounded"
+                  />
+                  <Input
+                    type="text"
+                    value={getSetting('secondary_color')}
+                    onChange={(e) => updateSetting('secondary_color', e.target.value)}
+                    className="flex-1"
+                    placeholder="#3b82f6"
+                  />
+                </div>
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="background_color">Hintergrundfarbe</Label>
+                <div className="flex items-center space-x-2">
+                  <Input
+                    type="color"
+                    value={getSetting('background_color') || '#f8fafc'}
+                    onChange={(e) => updateSetting('background_color', e.target.value)}
+                    className="w-16 h-10 p-1 border rounded"
+                  />
+                  <Input
+                    type="text"
+                    value={getSetting('background_color')}
+                    onChange={(e) => updateSetting('background_color', e.target.value)}
+                    className="flex-1"
+                    placeholder="#f8fafc"
+                  />
+                </div>
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="text_color">Textfarbe</Label>
+                <div className="flex items-center space-x-2">
+                  <Input
+                    type="color"
+                    value={getSetting('text_color') || '#1e293b'}
+                    onChange={(e) => updateSetting('text_color', e.target.value)}
+                    className="w-16 h-10 p-1 border rounded"
+                  />
+                  <Input
+                    type="text"
+                    value={getSetting('text_color')}
+                    onChange={(e) => updateSetting('text_color', e.target.value)}
+                    className="flex-1"
+                    placeholder="#1e293b"
+                  />
+                </div>
+              </div>
+
               {getSettingsByCategory('colors').map((setting) => (
                 <div key={setting.id} className="space-y-2">
                   <Label htmlFor={setting.setting_key}>{setting.display_name}</Label>
@@ -177,61 +256,87 @@ export const DesignSettingsManager = () => {
 
           <TabsContent value="typography" className="space-y-4">
             <div className="grid gap-4">
-              {getSettingsByCategory('typography').map((setting) => (
-                <div key={setting.id} className="space-y-2">
-                  <Label htmlFor={setting.setting_key}>{setting.display_name}</Label>
-                  <Select
-                    value={setting.setting_value}
-                    onValueChange={(value) => updateSetting(setting.setting_key, value)}
-                  >
-                    <SelectTrigger>
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {fontOptions.map((font) => (
-                        <SelectItem key={font.value} value={font.value}>
-                          <span style={{ fontFamily: font.value }}>{font.label}</span>
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </div>
-              ))}
+              <div className="space-y-2">
+                <Label htmlFor="header_font">Überschriften-Schriftart</Label>
+                <Select
+                  value={getSetting('header_font') || 'serif'}
+                  onValueChange={(value) => updateSetting('header_font', value)}
+                >
+                  <SelectTrigger>
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {fontOptions.map((font) => (
+                      <SelectItem key={font.value} value={font.value}>
+                        <span style={{ fontFamily: font.value }}>{font.label}</span>
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="body_font">Text-Schriftart</Label>
+                <Select
+                  value={getSetting('body_font') || 'Inter'}
+                  onValueChange={(value) => updateSetting('body_font', value)}
+                >
+                  <SelectTrigger>
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {fontOptions.map((font) => (
+                      <SelectItem key={font.value} value={font.value}>
+                        <span style={{ fontFamily: font.value }}>{font.label}</span>
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
             </div>
           </TabsContent>
 
           <TabsContent value="branding" className="space-y-4">
-            <div className="grid gap-4">
-              {getSettingsByCategory('branding').map((setting) => (
-                <div key={setting.id} className="space-y-2">
-                  <Label htmlFor={setting.setting_key}>{setting.display_name}</Label>
-                  {setting.setting_type === 'image' ? (
-                    <div className="space-y-2">
-                      <Input
-                        id={setting.setting_key}
-                        type="url"
-                        value={setting.setting_value}
-                        onChange={(e) => updateSetting(setting.setting_key, e.target.value)}
-                        placeholder="https://example.com/logo.png"
-                      />
-                      {setting.setting_value && (
-                        <img 
-                          src={setting.setting_value} 
-                          alt="Preview" 
-                          className="w-20 h-20 object-contain border rounded"
-                        />
-                      )}
-                    </div>
-                  ) : (
-                    <Input
-                      id={setting.setting_key}
-                      type="text"
-                      value={setting.setting_value}
-                      onChange={(e) => updateSetting(setting.setting_key, e.target.value)}
-                    />
-                  )}
-                </div>
-              ))}
+            <div className="space-y-4">
+              <div className="space-y-2">
+                <Label htmlFor="logo_url">Logo URL</Label>
+                <Input
+                  id="logo_url"
+                  type="url"
+                  value={getSetting('logo_url')}
+                  onChange={(e) => updateSetting('logo_url', e.target.value)}
+                  placeholder="/lovable-uploads/e38ae609-807b-42a5-b52d-27d67134bffc.png"
+                />
+                {getSetting('logo_url') && (
+                  <img 
+                    src={getSetting('logo_url')} 
+                    alt="Logo Preview" 
+                    className="w-20 h-20 object-contain border rounded"
+                  />
+                )}
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="site_title">Website-Titel</Label>
+                <Input
+                  id="site_title"
+                  type="text"
+                  value={getSetting('site_title')}
+                  onChange={(e) => updateSetting('site_title', e.target.value)}
+                  placeholder="ARTEMIS"
+                />
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="site_subtitle">Website-Untertitel</Label>
+                <Input
+                  id="site_subtitle"
+                  type="text"
+                  value={getSetting('site_subtitle')}
+                  onChange={(e) => updateSetting('site_subtitle', e.target.value)}
+                  placeholder="Griechisches Restaurant & Hotel"
+                />
+              </div>
             </div>
           </TabsContent>
 
@@ -344,6 +449,43 @@ export const DesignSettingsManager = () => {
                   value={getSetting('tab_border_radius')}
                   onChange={(e) => updateSetting('tab_border_radius', e.target.value)}
                   placeholder="8"
+                />
+              </div>
+            </div>
+          </TabsContent>
+
+          <TabsContent value="social" className="space-y-4">
+            <div className="space-y-4">
+              <div className="space-y-2">
+                <Label htmlFor="facebook_url">Facebook URL</Label>
+                <Input
+                  id="facebook_url"
+                  type="url"
+                  value={getSetting('facebook_url')}
+                  onChange={(e) => updateSetting('facebook_url', e.target.value)}
+                  placeholder="https://facebook.com/yourpage"
+                />
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="instagram_url">Instagram URL</Label>
+                <Input
+                  id="instagram_url"
+                  type="url"
+                  value={getSetting('instagram_url')}
+                  onChange={(e) => updateSetting('instagram_url', e.target.value)}
+                  placeholder="https://instagram.com/yourprofile"
+                />
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="tiktok_url">TikTok URL</Label>
+                <Input
+                  id="tiktok_url"
+                  type="url"
+                  value={getSetting('tiktok_url')}
+                  onChange={(e) => updateSetting('tiktok_url', e.target.value)}
+                  placeholder="https://tiktok.com/@yourprofile"
                 />
               </div>
             </div>

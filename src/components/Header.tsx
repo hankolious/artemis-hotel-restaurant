@@ -36,11 +36,13 @@ export const Header = ({ onShowAdminPanel }: HeaderProps) => {
           </div>
 
           <div className="flex items-center space-x-4 flex-1 md:flex-none">
-            <img 
-              src={settings.logo_url || "/placeholder.svg"} 
-              alt="Artemis Restaurant Logo" 
-              className="h-12 w-12 md:h-16 md:w-16 object-contain"
-            />
+            {settings.logo_url && (
+              <img 
+                src={settings.logo_url} 
+                alt="Logo" 
+                className="h-12 w-12 md:h-16 md:w-16 object-contain"
+              />
+            )}
             <div className="text-center md:text-left">
               <h1 
                 className="text-2xl md:text-4xl font-bold"

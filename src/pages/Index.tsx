@@ -20,7 +20,15 @@ const Index = () => {
   const { settings } = useWebsiteSettings();
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-white relative overflow-hidden">
+    <div 
+      className="min-h-screen relative overflow-hidden"
+      style={{ 
+        backgroundColor: settings.background_color || '#f8fafc',
+        background: settings.background_color 
+          ? settings.background_color 
+          : 'linear-gradient(to bottom right, #dbeafe, #ffffff)'
+      }}
+    >
       {/* Greek Flag Background */}
       <div 
         className="absolute inset-0 opacity-5 pointer-events-none"

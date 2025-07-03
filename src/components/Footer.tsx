@@ -1,5 +1,6 @@
 
 import { MapPin, Phone } from "lucide-react";
+import { SocialMediaLinks } from "./SocialMediaLinks";
 
 export const Footer = () => {
   return (
@@ -13,6 +14,7 @@ export const Footer = () => {
               Gemütliche Hotelzimmer{'\n'}
               Herzliche Gastfreundschaft
             </p>
+            <SocialMediaLinks />
           </div>
           <div>
             <h4 className="font-semibold mb-4">Kontakt</h4>

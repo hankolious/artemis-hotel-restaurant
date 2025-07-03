@@ -70,6 +70,8 @@ export const useWebsiteSettings = () => {
     }
     if (settingsMap.background_color) {
       root.style.setProperty('--background-color', settingsMap.background_color);
+      // Apply to body background
+      document.body.style.backgroundColor = settingsMap.background_color;
     }
     if (settingsMap.text_color) {
       root.style.setProperty('--text-color', settingsMap.text_color);
