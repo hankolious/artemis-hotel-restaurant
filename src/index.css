@@ -16,6 +16,8 @@ All colors MUST be HSL.
   --text-color: #1e293b;
   --header-font: serif;
   --body-font: Inter;
+  --tab-border-radius: 8px;
+  --banner-border-radius: 0px;
 }
 
 @layer base {
@@ -136,5 +138,14 @@ All colors MUST be HSL.
 
   .border-primary-dynamic {
     border-color: var(--primary-color);
+  }
+
+  /* Dynamic tab styling */
+  [data-state="active"] {
+    border-radius: var(--tab-border-radius) !important;
+  }
+
+  .tab-trigger {
+    border-radius: var(--tab-border-radius);
   }
 }

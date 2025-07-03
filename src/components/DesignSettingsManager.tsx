@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Palette, Type, Image, Settings } from "lucide-react";
+import { Palette, Type, Image, Settings, Layout, FileImage } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 
@@ -90,6 +90,10 @@ export const DesignSettingsManager = () => {
     return settings.filter(setting => setting.category === category);
   };
 
+  const getSetting = (key: string) => {
+    return settings.find(setting => setting.setting_key === key)?.setting_value || '';
+  };
+
   const fontOptions = [
     { value: 'serif', label: 'Serif (Times)' },
     { value: 'sans-serif', label: 'Sans-serif (Arial)' },
@@ -122,18 +126,26 @@ export const DesignSettingsManager = () => {
       </CardHeader>
       <CardContent>
         <Tabs defaultValue="colors" className="w-full">
-          <TabsList className="grid w-full grid-cols-3">
+          <TabsList className="grid w-full grid-cols-5">
             <TabsTrigger value="colors" className="flex items-center">
               <Palette className="w-4 h-4 mr-2" />
               Farben
             </TabsTrigger>
             <TabsTrigger value="typography" className="flex items-center">
               <Type className="w-4 h-4 mr-2" />
-              Schriftarten
+              Schrift
             </TabsTrigger>
             <TabsTrigger value="branding" className="flex items-center">
               <Image className="w-4 h-4 mr-2" />
-              Branding
+              Logo
+            </TabsTrigger>
+            <TabsTrigger value="banner" className="flex items-center">
+              <FileImage className="w-4 h-4 mr-2" />
+              Banner
+            </TabsTrigger>
+            <TabsTrigger value="layout" className="flex items-center">
+              <Layout className="w-4 h-4 mr-2" />
+              Layout
             </TabsTrigger>
           </TabsList>
 
@@ -222,12 +234,126 @@ export const DesignSettingsManager = () => {
               ))}
             </div>
           </TabsContent>
+
+          <TabsContent value="banner" className="space-y-4">
+            <div className="space-y-4">
+              <div className="space-y-2">
+                <Label htmlFor="banner_image">Banner Bild URL</Label>
+                <Input
+                  id="banner_image"
+                  type="url"
+                  value={getSetting('banner_image')}
+                  onChange={(e) => updateSetting('banner_image', e.target.value)}
+                  placeholder="/lovable-uploads/8ed39435-b5e1-4e3f-acbd-d04a4e84f4bc.png"
+                />
+                {getSetting('banner_image') && (
+                  <img 
+                    src={getSetting('banner_image')} 
+                    alt="Banner Preview" 
+                    className="w-full h-32 object-cover border rounded"
+                  />
+                )}
+              </div>
+              
+              <div className="grid gap-4 md:grid-cols-2">
+                <div className="space-y-2">
+                  <Label htmlFor="banner_title">Banner Titel</Label>
+                  <Input
+                    id="banner_title"
+                    type="text"
+                    value={getSetting('banner_title')}
+                    onChange={(e) => updateSetting('banner_title', e.target.value)}
+                    placeholder="Willkommen bei ARTEMIS"
+                  />
+                </div>
+                
+                <div className="space-y-2">
+                  <Label htmlFor="banner_subtitle">Banner Untertitel</Label>
+                  <Input
+                    id="banner_subtitle"
+                    type="text"
+                    value={getSetting('banner_subtitle')}
+                    onChange={(e) => updateSetting('banner_subtitle', e.target.value)}
+                    placeholder="Erleben Sie authentische griechische Küche"
+                  />
+                </div>
+                
+                <div className="space-y-2">
+                  <Label htmlFor="banner_text_color">Banner Titel Farbe</Label>
+                  <div className="flex items-center space-x-2">
+                    <Input
+                      type="color"
+                      value={getSetting('banner_text_color') || '#ffffff'}
+                      onChange={(e) => updateSetting('banner_text_color', e.target.value)}
+                      className="w-16 h-10 p-1 border rounded"
+                    />
+                    <Input
+                      type="text"
+                      value={getSetting('banner_text_color')}
+                      onChange={(e) => updateSetting('banner_text_color', e.target.value)}
+                      className="flex-1"
+                      placeholder="#ffffff"
+                    />
+                  </div>
+                </div>
+                
+                <div className="space-y-2">
+                  <Label htmlFor="banner_subtitle_color">Banner Untertitel Farbe</Label>
+                  <div className="flex items-center space-x-2">
+                    <Input
+                      type="color"
+                      value={getSetting('banner_subtitle_color') || '#ffffff'}
+                      onChange={(e) => updateSetting('banner_subtitle_color', e.target.value)}
+                      className="w-16 h-10 p-1 border rounded"
+                    />
+                    <Input
+                      type="text"
+                      value={getSetting('banner_subtitle_color')}
+                      onChange={(e) => updateSetting('banner_subtitle_color', e.target.value)}
+                      className="flex-1"
+                      placeholder="#ffffff"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </TabsContent>
+
+          <TabsContent value="layout" className="space-y-4">
+            <div className="grid gap-4 md:grid-cols-2">
+              <div className="space-y-2">
+                <Label htmlFor="banner_border_radius">Banner Ecken-Rundung (px)</Label>
+                <Input
+                  id="banner_border_radius"
+                  type="number"
+                  min="0"
+                  max="50"
+                  value={getSetting('banner_border_radius')}
+                  onChange={(e) => updateSetting('banner_border_radius', e.target.value)}
+                  placeholder="0"
+                />
+              </div>
+              
+              <div className="space-y-2">
+                <Label htmlFor="tab_border_radius">Tab Ecken-Rundung (px)</Label>
+                <Input
+                  id="tab_border_radius"
+                  type="number"
+                  min="0"
+                  max="25"
+                  value={getSetting('tab_border_radius')}
+                  onChange={(e) => updateSetting('tab_border_radius', e.target.value)}
+                  placeholder="8"
+                />
+              </div>
+            </div>
+          </TabsContent>
         </Tabs>
 
         <div className="mt-6 p-4 bg-blue-50 rounded-lg">
           <p className="text-sm text-blue-800">
             <strong>Hinweis:</strong> Änderungen werden automatisch gespeichert. 
-            Für Schriftarten müssen eventuell Google Fonts Links in der HTML hinzugefügt werden.
+            Aktualisieren Sie die Seite, um alle Änderungen zu sehen.
           </p>
         </div>
       </CardContent>

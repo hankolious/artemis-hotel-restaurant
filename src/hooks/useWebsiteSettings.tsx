@@ -82,6 +82,14 @@ export const useWebsiteSettings = () => {
     if (settingsMap.body_font) {
       root.style.setProperty('--body-font', settingsMap.body_font);
     }
+
+    // Apply layout settings
+    if (settingsMap.tab_border_radius) {
+      root.style.setProperty('--tab-border-radius', `${settingsMap.tab_border_radius}px`);
+    }
+    if (settingsMap.banner_border_radius) {
+      root.style.setProperty('--banner-border-radius', `${settingsMap.banner_border_radius}px`);
+    }
   };
 
   return { settings, loading, refetch: fetchSettings };

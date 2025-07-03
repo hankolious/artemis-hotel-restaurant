@@ -1,62 +1,51 @@
 
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { MapPin, Camera, Users, Utensils, Calendar, Star } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { useWebsiteSettings } from "@/hooks/useWebsiteSettings";
 
 interface NavigationProps {
   selectedTab: string;
-  onTabChange: (value: string) => void;
+  onTabChange: (tab: string) => void;
 }
 
 export const Navigation = ({ selectedTab, onTabChange }: NavigationProps) => {
+  const { settings } = useWebsiteSettings();
+
+  const navItems = [
+    { id: "restaurant", label: "Restaurant", icon: "🍽️" },
+    { id: "hotel", label: "Hotel", icon: "🏨" },
+    { id: "events", label: "Events", icon: "🎉" },
+    { id: "location", label: "Lage", icon: "📍" },
+    { id: "reviews", label: "Bewertungen", icon: "⭐" },
+    { id: "gallery", label: "Galerie", icon: "📸" },
+  ];
+
+  const borderRadius = settings.tab_border_radius ? `${settings.tab_border_radius}px` : '8px';
+
   return (
-    <nav className="bg-blue-800 text-white shadow-lg">
-      <div className="container mx-auto px-2 md:px-4">
-        <Tabs value={selectedTab} onValueChange={onTabChange} className="w-full">
-          <TabsList className="grid w-full grid-cols-6 bg-blue-800 rounded-none border-b-2 border-blue-600 h-16 md:h-auto">
-            <TabsTrigger 
-              value="restaurant" 
-              className="text-white data-[state=active]:bg-blue-600 data-[state=active]:text-white py-2 md:py-3 font-medium text-xs md:text-sm px-1 md:px-3 flex flex-col md:flex-row items-center justify-center gap-1 md:gap-2 min-h-[60px] md:min-h-auto"
+    <nav className="sticky top-0 z-20 bg-white/95 backdrop-blur-sm border-b border-gray-200 shadow-sm">
+      <div className="container mx-auto px-4">
+        <div className="flex flex-wrap items-center justify-center gap-2 py-4">
+          {navItems.map((item) => (
+            <Button
+              key={item.id}
+              variant={selectedTab === item.id ? "default" : "ghost"}
+              onClick={() => onTabChange(item.id)}
+              className={`flex items-center space-x-2 px-4 py-2 transition-all duration-200 hover:scale-105 ${
+                selectedTab === item.id 
+                  ? 'text-white shadow-lg' 
+                  : 'text-gray-600 hover:text-gray-900'
+              }`}
+              style={{
+                backgroundColor: selectedTab === item.id ? settings.primary_color || '#1e40af' : 'transparent',
+                borderRadius: borderRadius,
+                color: selectedTab === item.id ? '#ffffff' : settings.text_color || '#374151'
+              }}
             >
-              <Utensils className="w-3 h-3 md:w-4 md:h-4" />
-              <span className="text-[10px] md:text-sm leading-tight">Restaurant</span>
-            </TabsTrigger>
-            <TabsTrigger 
-              value="hotel" 
-              className="text-white data-[state=active]:bg-blue-600 data-[state=active]:text-white py-2 md:py-3 font-medium text-xs md:text-sm px-1 md:px-3 flex flex-col md:flex-row items-center justify-center gap-1 md:gap-2 min-h-[60px] md:min-h-auto"
-            >
-              <Users className="w-3 h-3 md:w-4 md:h-4" />
-              <span className="text-[10px] md:text-sm leading-tight">Hotel</span>
-            </TabsTrigger>
-            <TabsTrigger 
-              value="events" 
-              className="text-white data-[state=active]:bg-blue-600 data-[state=active]:text-white py-2 md:py-3 font-medium text-xs md:text-sm px-1 md:px-3 flex flex-col md:flex-row items-center justify-center gap-1 md:gap-2 min-h-[60px] md:min-h-auto"
-            >
-              <Calendar className="w-3 h-3 md:w-4 md:h-4" />
-              <span className="text-[10px] md:text-sm leading-tight">Events</span>
-            </TabsTrigger>
-            <TabsTrigger 
-              value="location" 
-              className="text-white data-[state=active]:bg-blue-600 data-[state=active]:text-white py-2 md:py-3 font-medium text-xs md:text-sm px-1 md:px-3 flex flex-col md:flex-row items-center justify-center gap-1 md:gap-2 min-h-[60px] md:min-h-auto"
-            >
-              <MapPin className="w-3 h-3 md:w-4 md:h-4" />
-              <span className="text-[10px] md:text-sm leading-tight">Standort</span>
-            </TabsTrigger>
-            <TabsTrigger 
-              value="reviews" 
-              className="text-white data-[state=active]:bg-blue-600 data-[state=active]:text-white py-2 md:py-3 font-medium text-xs md:text-sm px-1 md:px-3 flex flex-col md:flex-row items-center justify-center gap-1 md:gap-2 min-h-[60px] md:min-h-auto"
-            >
-              <Star className="w-3 h-3 md:w-4 md:h-4" />
-              <span className="text-[10px] md:text-sm leading-tight">Bewertungen</span>
-            </TabsTrigger>
-            <TabsTrigger 
-              value="gallery" 
-              className="text-white data-[state=active]:bg-blue-600 data-[state=active]:text-white py-2 md:py-3 font-medium text-xs md:text-sm px-1 md:px-3 flex flex-col md:flex-row items-center justify-center gap-1 md:gap-2 min-h-[60px] md:min-h-auto"
-            >
-              <Camera className="w-3 h-3 md:w-4 md:h-4" />
-              <span className="text-[10px] md:text-sm leading-tight">Galerie</span>
-            </TabsTrigger>
-          </TabsList>
-        </Tabs>
+              <span className="text-lg">{item.icon}</span>
+              <span className="font-medium">{item.label}</span>
+            </Button>
+          ))}
+        </div>
       </div>
     </nav>
   );

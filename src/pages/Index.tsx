@@ -12,10 +12,12 @@ import { LocationMap } from "@/components/LocationMap";
 import { AdminPanel } from "@/components/AdminPanel";
 import { GuestReviews } from "@/components/GuestReviews";
 import { SpecialEventsDisplay } from "@/components/SpecialEventsDisplay";
+import { useWebsiteSettings } from "@/hooks/useWebsiteSettings";
 
 const Index = () => {
   const [selectedTab, setSelectedTab] = useState("restaurant");
   const [showAdminPanel, setShowAdminPanel] = useState(false);
+  const { settings } = useWebsiteSettings();
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-white relative overflow-hidden">
@@ -31,6 +33,42 @@ const Index = () => {
       />
       
       <Header onShowAdminPanel={() => setShowAdminPanel(true)} />
+      
+      {/* Hero Banner Section */}
+      <div className="relative w-full h-96 overflow-hidden">
+        <img 
+          src={settings.banner_image || "/lovable-uploads/8ed39435-b5e1-4e3f-acbd-d04a4e84f4bc.png"}
+          alt="Restaurant Banner" 
+          className="w-full h-full object-cover"
+          style={{
+            borderRadius: settings.banner_border_radius ? `${settings.banner_border_radius}px` : '0px'
+          }}
+        />
+        <div 
+          className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center"
+          style={{
+            borderRadius: settings.banner_border_radius ? `${settings.banner_border_radius}px` : '0px'
+          }}
+        >
+          <div className="text-center text-white">
+            <h1 
+              className="text-4xl md:text-6xl font-bold mb-4"
+              style={{ 
+                fontFamily: `var(--header-font), serif`,
+                color: settings.banner_text_color || '#ffffff'
+              }}
+            >
+              {settings.banner_title || 'Willkommen bei ARTEMIS'}
+            </h1>
+            <p 
+              className="text-lg md:text-xl max-w-2xl mx-auto px-4"
+              style={{ color: settings.banner_subtitle_color || '#ffffff' }}
+            >
+              {settings.banner_subtitle || 'Erleben Sie authentische griechische Küche und Gastfreundschaft in unserem Restaurant & Hotel'}
+            </p>
+          </div>
+        </div>
+      </div>
       
       <Navigation selectedTab={selectedTab} onTabChange={setSelectedTab} />
 
