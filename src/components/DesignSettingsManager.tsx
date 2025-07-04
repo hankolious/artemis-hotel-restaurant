@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Textarea } from "@/components/ui/textarea";
 import { Palette, Type, Image, Settings, Layout, FileImage, Share2, FileText } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
@@ -530,72 +531,162 @@ export const DesignSettingsManager = () => {
             </div>
           </TabsContent>
 
-          <TabsContent value="content" className="space-y-4">
-            <div className="space-y-4">
-              <div className="space-y-2">
-                <Label htmlFor="volume_text">Volumen Text (z.B. 4cl)</Label>
-                <Input
-                  id="volume_text"
-                  type="text"
-                  value={getSetting('volume_text')}
-                  onChange={(e) => updateSetting('volume_text', e.target.value)}
-                  placeholder="4cl"
-                />
+          <TabsContent value="content" className="space-y-6">
+            <div className="space-y-6">
+              <div className="border-b pb-4">
+                <h3 className="text-lg font-semibold mb-4">Menü Text-Optionen</h3>
+                <div className="grid gap-4 md:grid-cols-2">
+                  <div className="space-y-2">
+                    <Label htmlFor="volume_text">Volumen Text (z.B. 4cl)</Label>
+                    <Input
+                      id="volume_text"
+                      type="text"
+                      value={getSetting('volume_text')}
+                      onChange={(e) => updateSetting('volume_text', e.target.value)}
+                      placeholder="4cl"
+                    />
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="alcohol_percentage_text">Alkoholgehalt Text (z.B. 15% Vol)</Label>
+                    <Input
+                      id="alcohol_percentage_text"
+                      type="text"
+                      value={getSetting('alcohol_percentage_text')}
+                      onChange={(e) => updateSetting('alcohol_percentage_text', e.target.value)}
+                      placeholder="15% Vol"
+                    />
+                  </div>
+                </div>
+
+                <div className="grid gap-4 md:grid-cols-2 mt-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="menu_text_font">Menü Text Schriftart</Label>
+                    <Select
+                      value={getSetting('menu_text_font') || 'Inter'}
+                      onValueChange={(value) => updateSetting('menu_text_font', value)}
+                    >
+                      <SelectTrigger>
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {fontOptions.map((font) => (
+                          <SelectItem key={font.value} value={font.value}>
+                            <span style={{ fontFamily: font.value }}>{font.label}</span>
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="menu_text_color">Menü Text Farbe</Label>
+                    <div className="flex items-center space-x-2">
+                      <Input
+                        type="color"
+                        value={getSetting('menu_text_color') || '#374151'}
+                        onChange={(e) => updateSetting('menu_text_color', e.target.value)}
+                        className="w-16 h-10 p-1 border rounded"
+                      />
+                      <Input
+                        type="text"
+                        value={getSetting('menu_text_color')}
+                        onChange={(e) => updateSetting('menu_text_color', e.target.value)}
+                        className="flex-1"
+                        placeholder="#374151"
+                      />
+                    </div>
+                  </div>
+                </div>
               </div>
 
-              <div className="space-y-2">
-                <Label htmlFor="alcohol_percentage_text">Alkoholgehalt Text (z.B. 15% Vol)</Label>
-                <Input
-                  id="alcohol_percentage_text"
-                  type="text"
-                  value={getSetting('alcohol_percentage_text')}
-                  onChange={(e) => updateSetting('alcohol_percentage_text', e.target.value)}
-                  placeholder="15% Vol"
-                />
-              </div>
+              <div className="border-b pb-4">
+                <h3 className="text-lg font-semibold mb-4">Footer Text-Optionen</h3>
+                <div className="space-y-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="footer_text_line1">Footer Text Zeile 1</Label>
+                    <Input
+                      id="footer_text_line1"
+                      type="text"
+                      value={getSetting('footer_text_line1')}
+                      onChange={(e) => updateSetting('footer_text_line1', e.target.value)}
+                      placeholder="Authentische griechische Küche"
+                    />
+                  </div>
 
-              <div className="space-y-2">
-                <Label htmlFor="footer_text_line1">Footer Text Zeile 1</Label>
-                <Input
-                  id="footer_text_line1"
-                  type="text"
-                  value={getSetting('footer_text_line1')}
-                  onChange={(e) => updateSetting('footer_text_line1', e.target.value)}
-                  placeholder="Authentische griechische Küche"
-                />
-              </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="footer_text_line2">Footer Text Zeile 2</Label>
+                    <Input
+                      id="footer_text_line2"
+                      type="text"
+                      value={getSetting('footer_text_line2')}
+                      onChange={(e) => updateSetting('footer_text_line2', e.target.value)}
+                      placeholder="Gemütliche Hotelzimmer"
+                    />
+                  </div>
 
-              <div className="space-y-2">
-                <Label htmlFor="footer_text_line2">Footer Text Zeile 2</Label>
-                <Input
-                  id="footer_text_line2"
-                  type="text"
-                  value={getSetting('footer_text_line2')}
-                  onChange={(e) => updateSetting('footer_text_line2', e.target.value)}
-                  placeholder="Gemütliche Hotelzimmer"
-                />
-              </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="footer_text_line3">Footer Text Zeile 3</Label>
+                    <Input
+                      id="footer_text_line3"
+                      type="text"
+                      value={getSetting('footer_text_line3')}
+                      onChange={(e) => updateSetting('footer_text_line3', e.target.value)}
+                      placeholder="Herzliche Gastfreundschaft"
+                    />
+                  </div>
 
-              <div className="space-y-2">
-                <Label htmlFor="footer_text_line3">Footer Text Zeile 3</Label>
-                <Input
-                  id="footer_text_line3"
-                  type="text"
-                  value={getSetting('footer_text_line3')}
-                  onChange={(e) => updateSetting('footer_text_line3', e.target.value)}
-                  placeholder="Herzliche Gastfreundschaft"
-                />
-              </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="copyright_text">Copyright Text</Label>
+                    <Input
+                      id="copyright_text"
+                      type="text"
+                      value={getSetting('copyright_text')}
+                      onChange={(e) => updateSetting('copyright_text', e.target.value)}
+                      placeholder="© 2024 Restaurant Artemis. Alle Rechte vorbehalten."
+                    />
+                  </div>
+                </div>
 
-              <div className="space-y-2">
-                <Label htmlFor="copyright_text">Copyright Text</Label>
-                <Input
-                  id="copyright_text"
-                  type="text"
-                  value={getSetting('copyright_text')}
-                  onChange={(e) => updateSetting('copyright_text', e.target.value)}
-                  placeholder="© 2024 Restaurant Artemis. Alle Rechte vorbehalten."
-                />
+                <div className="grid gap-4 md:grid-cols-2 mt-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="footer_text_font">Footer Text Schriftart</Label>
+                    <Select
+                      value={getSetting('footer_text_font') || 'Inter'}
+                      onValueChange={(value) => updateSetting('footer_text_font', value)}
+                    >
+                      <SelectTrigger>
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {fontOptions.map((font) => (
+                          <SelectItem key={font.value} value={font.value}>
+                            <span style={{ fontFamily: font.value }}>{font.label}</span>
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="footer_text_color">Footer Text Farbe</Label>
+                    <div className="flex items-center space-x-2">
+                      <Input
+                        type="color"
+                        value={getSetting('footer_text_color') || '#93c5fd'}
+                        onChange={(e) => updateSetting('footer_text_color', e.target.value)}
+                        className="w-16 h-10 p-1 border rounded"
+                      />
+                      <Input
+                        type="text"
+                        value={getSetting('footer_text_color')}
+                        onChange={(e) => updateSetting('footer_text_color', e.target.value)}
+                        className="flex-1"
+                        placeholder="#93c5fd"
+                      />
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </TabsContent>

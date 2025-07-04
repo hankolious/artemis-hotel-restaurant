@@ -79,6 +79,12 @@ export const useWebsiteSettings = () => {
     if (settingsMap.footer_color) {
       root.style.setProperty('--footer-color', settingsMap.footer_color);
     }
+    if (settingsMap.footer_text_color) {
+      root.style.setProperty('--footer-text-color', settingsMap.footer_text_color);
+    }
+    if (settingsMap.menu_text_color) {
+      root.style.setProperty('--menu-text-color', settingsMap.menu_text_color);
+    }
 
     // Apply fonts
     if (settingsMap.header_font) {
@@ -89,6 +95,12 @@ export const useWebsiteSettings = () => {
     }
     if (settingsMap.navigation_font) {
       root.style.setProperty('--navigation-font', settingsMap.navigation_font);
+    }
+    if (settingsMap.footer_text_font) {
+      root.style.setProperty('--footer-text-font', settingsMap.footer_text_font);
+    }
+    if (settingsMap.menu_text_font) {
+      root.style.setProperty('--menu-text-font', settingsMap.menu_text_font);
     }
 
     // Apply layout settings

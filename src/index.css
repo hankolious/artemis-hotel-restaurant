@@ -15,9 +15,13 @@ All colors MUST be HSL.
   --background-color: #f8fafc;
   --text-color: #1e293b;
   --footer-color: #1e3a8a;
+  --footer-text-color: #93c5fd;
+  --menu-text-color: #374151;
   --header-font: serif;
   --body-font: Inter;
   --navigation-font: Inter;
+  --footer-text-font: Inter;
+  --menu-text-font: Inter;
   --tab-border-radius: 8px;
   --banner-border-radius: 0px;
 }
@@ -125,6 +129,18 @@ All colors MUST be HSL.
     font-family: var(--navigation-font), sans-serif;
   }
 
+  /* Menu text styling */
+  .menu-text {
+    font-family: var(--menu-text-font), sans-serif;
+    color: var(--menu-text-color);
+  }
+
+  /* Footer text styling */
+  .footer-text {
+    font-family: var(--footer-text-font), sans-serif;
+    color: var(--footer-text-color);
+  }
+
   /* Dynamic color classes */
   .bg-primary-dynamic {
     background-color: var(--primary-color);
@@ -152,6 +168,14 @@ All colors MUST be HSL.
 
   .text-accent-dynamic {
     color: var(--accent-color);
+  }
+
+  .text-footer-dynamic {
+    color: var(--footer-text-color);
+  }
+
+  .text-menu-dynamic {
+    color: var(--menu-text-color);
   }
 
   .border-primary-dynamic {
