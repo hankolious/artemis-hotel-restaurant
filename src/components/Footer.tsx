@@ -1,4 +1,3 @@
-
 import { MapPin, Phone } from "lucide-react";
 import { SocialMediaLinks } from "./SocialMediaLinks";
 import { useWebsiteSettings } from "@/hooks/useWebsiteSettings";
@@ -38,7 +37,7 @@ export const Footer = () => {
             <SocialMediaLinks />
           </div>
           <div>
-            <h4 className="font-semibold mb-4">Kontakt</h4>
+            <h4 className="font-semibold mb-4" style={{ color: '#940505' }}>Kontakt</h4>
             <p 
               className="mb-2"
               style={{ 
