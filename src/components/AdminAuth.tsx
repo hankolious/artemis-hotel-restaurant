@@ -63,10 +63,10 @@ export const AdminAuth = ({ onAuthenticated, onClose }: AdminAuthProps) => {
 
   return (
     <Card className="w-full">
-      <CardHeader className="space-y-1">
+      <CardHeader className="space-y-1 pb-4">
         <div className="flex items-center justify-between">
-          <CardTitle className="text-2xl text-blue-900 flex items-center">
-            <LogIn className="w-5 h-5 mr-2" />
+          <CardTitle className="text-xl text-blue-900 flex items-center">
+            <LogIn className="w-4 h-4 mr-2" />
             Admin Login
           </CardTitle>
           <Button variant="ghost" size="sm" onClick={onClose}>
@@ -74,33 +74,33 @@ export const AdminAuth = ({ onAuthenticated, onClose }: AdminAuthProps) => {
           </Button>
         </div>
       </CardHeader>
-      <CardContent>
-        <form onSubmit={handleLogin} className="space-y-4">
-          <div className="space-y-2">
-            <Label htmlFor="email">E-Mail</Label>
+      <CardContent className="pt-0">
+        <form onSubmit={handleLogin} className="space-y-3">
+          <div className="space-y-1">
+            <Label htmlFor="email" className="text-sm">E-Mail</Label>
             <Input
               id="email"
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
-              className="border-blue-200 focus:border-blue-500"
+              className="border-blue-200 focus:border-blue-500 h-9"
             />
           </div>
-          <div className="space-y-2">
-            <Label htmlFor="password">Passwort</Label>
+          <div className="space-y-1">
+            <Label htmlFor="password" className="text-sm">Passwort</Label>
             <Input
               id="password"
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
-              className="border-blue-200 focus:border-blue-500"
+              className="border-blue-200 focus:border-blue-500 h-9"
             />
           </div>
           <Button 
             type="submit" 
-            className="w-full bg-blue-600 hover:bg-blue-700"
+            className="w-full bg-blue-600 hover:bg-blue-700 h-9"
             disabled={isLoading}
           >
             {isLoading ? "Anmeldung..." : "Anmelden"}

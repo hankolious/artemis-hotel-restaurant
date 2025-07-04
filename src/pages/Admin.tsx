@@ -15,9 +15,9 @@ const Admin = () => {
         }}
       />
       
-      <div className="w-full max-w-md">
-        <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-blue-900 mb-2" style={{ fontFamily: 'serif' }}>
+      <div className="w-full max-w-sm">
+        <div className="text-center mb-6">
+          <h1 className="text-3xl font-bold text-blue-900 mb-2" style={{ fontFamily: 'serif' }}>
             ARTEMIS
           </h1>
           <p className="text-blue-700 text-sm font-medium">Admin Login</p>

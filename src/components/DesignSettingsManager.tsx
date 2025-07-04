@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -85,10 +86,6 @@ export const DesignSettingsManager = () => {
     }
   };
 
-  const getSettingsByCategory = (category: string) => {
-    return settings.filter(setting => setting.category === category);
-  };
-
   const getSetting = (key: string) => {
     return settings.find(setting => setting.setting_key === key)?.setting_value || '';
   };
@@ -103,6 +100,9 @@ export const DesignSettingsManager = () => {
     { value: 'Montserrat', label: 'Montserrat' },
     { value: 'Playfair Display', label: 'Playfair Display' },
     { value: 'Dancing Script', label: 'Dancing Script' },
+    { value: 'Poppins', label: 'Poppins' },
+    { value: 'Nunito', label: 'Nunito' },
+    { value: 'Source Sans Pro', label: 'Source Sans Pro' },
   ];
 
   if (loading) {
@@ -155,7 +155,7 @@ export const DesignSettingsManager = () => {
           <TabsContent value="colors" className="space-y-4">
             <div className="grid gap-4 md:grid-cols-2">
               <div className="space-y-2">
-                <Label htmlFor="primary_color">Primärfarbe (Haupttitel)</Label>
+                <Label htmlFor="primary_color">Primärfarbe (Haupttitel & Tabs)</Label>
                 <div className="flex items-center space-x-2">
                   <Input
                     type="color"
@@ -174,7 +174,7 @@ export const DesignSettingsManager = () => {
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="secondary_color">Sekundärfarbe (Untertitel)</Label>
+                <Label htmlFor="secondary_color">Sekundärfarbe (Untertitel & Links)</Label>
                 <div className="flex items-center space-x-2">
                   <Input
                     type="color"
@@ -212,7 +212,7 @@ export const DesignSettingsManager = () => {
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="text_color">Textfarbe</Label>
+                <Label htmlFor="text_color">Haupttextfarbe</Label>
                 <div className="flex items-center space-x-2">
                   <Input
                     type="color"
@@ -230,34 +230,50 @@ export const DesignSettingsManager = () => {
                 </div>
               </div>
 
-              {getSettingsByCategory('colors').map((setting) => (
-                <div key={setting.id} className="space-y-2">
-                  <Label htmlFor={setting.setting_key}>{setting.display_name}</Label>
-                  <div className="flex items-center space-x-2">
-                    <Input
-                      id={setting.setting_key}
-                      type="color"
-                      value={setting.setting_value}
-                      onChange={(e) => updateSetting(setting.setting_key, e.target.value)}
-                      className="w-16 h-10 p-1 border rounded"
-                    />
-                    <Input
-                      type="text"
-                      value={setting.setting_value}
-                      onChange={(e) => updateSetting(setting.setting_key, e.target.value)}
-                      className="flex-1"
-                      placeholder="#000000"
-                    />
-                  </div>
+              <div className="space-y-2">
+                <Label htmlFor="accent_color">Akzentfarbe (Buttons & Highlights)</Label>
+                <div className="flex items-center space-x-2">
+                  <Input
+                    type="color"
+                    value={getSetting('accent_color') || '#60a5fa'}
+                    onChange={(e) => updateSetting('accent_color', e.target.value)}
+                    className="w-16 h-10 p-1 border rounded"
+                  />
+                  <Input
+                    type="text"
+                    value={getSetting('accent_color')}
+                    onChange={(e) => updateSetting('accent_color', e.target.value)}
+                    className="flex-1"
+                    placeholder="#60a5fa"
+                  />
                 </div>
-              ))}
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="footer_color">Footer Hintergrundfarbe</Label>
+                <div className="flex items-center space-x-2">
+                  <Input
+                    type="color"
+                    value={getSetting('footer_color') || '#1e3a8a'}
+                    onChange={(e) => updateSetting('footer_color', e.target.value)}
+                    className="w-16 h-10 p-1 border rounded"
+                  />
+                  <Input
+                    type="text"
+                    value={getSetting('footer_color')}
+                    onChange={(e) => updateSetting('footer_color', e.target.value)}
+                    className="flex-1"
+                    placeholder="#1e3a8a"
+                  />
+                </div>
+              </div>
             </div>
           </TabsContent>
 
           <TabsContent value="typography" className="space-y-4">
             <div className="grid gap-4">
               <div className="space-y-2">
-                <Label htmlFor="header_font">Überschriften-Schriftart</Label>
+                <Label htmlFor="header_font">Titel-Schriftart (H1, H2, etc.)</Label>
                 <Select
                   value={getSetting('header_font') || 'serif'}
                   onValueChange={(value) => updateSetting('header_font', value)}
@@ -276,10 +292,29 @@ export const DesignSettingsManager = () => {
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="body_font">Text-Schriftart</Label>
+                <Label htmlFor="body_font">Fließtext-Schriftart</Label>
                 <Select
                   value={getSetting('body_font') || 'Inter'}
                   onValueChange={(value) => updateSetting('body_font', value)}
+                >
+                  <SelectTrigger>
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {fontOptions.map((font) => (
+                      <SelectItem key={font.value} value={font.value}>
+                        <span style={{ fontFamily: font.value }}>{font.label}</span>
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="navigation_font">Navigation-Schriftart</Label>
+                <Select
+                  value={getSetting('navigation_font') || 'Inter'}
+                  onValueChange={(value) => updateSetting('navigation_font', value)}
                 >
                   <SelectTrigger>
                     <SelectValue />

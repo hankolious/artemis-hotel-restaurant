@@ -76,6 +76,9 @@ export const useWebsiteSettings = () => {
     if (settingsMap.text_color) {
       root.style.setProperty('--text-color', settingsMap.text_color);
     }
+    if (settingsMap.footer_color) {
+      root.style.setProperty('--footer-color', settingsMap.footer_color);
+    }
 
     // Apply fonts
     if (settingsMap.header_font) {
@@ -83,6 +86,9 @@ export const useWebsiteSettings = () => {
     }
     if (settingsMap.body_font) {
       root.style.setProperty('--body-font', settingsMap.body_font);
+    }
+    if (settingsMap.navigation_font) {
+      root.style.setProperty('--navigation-font', settingsMap.navigation_font);
     }
 
     // Apply layout settings

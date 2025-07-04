@@ -22,7 +22,10 @@ export const Navigation = ({ selectedTab, onTabChange }: NavigationProps) => {
   const borderRadius = settings.tab_border_radius ? `${settings.tab_border_radius}px` : '8px';
 
   return (
-    <nav className="sticky top-0 z-20 bg-white/95 backdrop-blur-sm border-b border-gray-200 shadow-sm">
+    <nav 
+      className="sticky top-0 z-20 bg-white/95 backdrop-blur-sm border-b border-gray-200 shadow-sm navigation"
+      style={{ fontFamily: `var(--navigation-font), sans-serif` }}
+    >
       <div className="container mx-auto px-4">
         <div className="flex flex-wrap items-center justify-center gap-2 py-4">
           {navItems.map((item) => (
@@ -38,7 +41,8 @@ export const Navigation = ({ selectedTab, onTabChange }: NavigationProps) => {
               style={{
                 backgroundColor: selectedTab === item.id ? settings.primary_color || '#1e40af' : 'transparent',
                 borderRadius: borderRadius,
-                color: selectedTab === item.id ? '#ffffff' : settings.text_color || '#374151'
+                color: selectedTab === item.id ? '#ffffff' : settings.text_color || '#374151',
+                fontFamily: `var(--navigation-font), sans-serif`
               }}
             >
               <span className="text-lg">{item.icon}</span>

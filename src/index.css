@@ -14,8 +14,10 @@ All colors MUST be HSL.
   --accent-color: #60a5fa;
   --background-color: #f8fafc;
   --text-color: #1e293b;
+  --footer-color: #1e3a8a;
   --header-font: serif;
   --body-font: Inter;
+  --navigation-font: Inter;
   --tab-border-radius: 8px;
   --banner-border-radius: 0px;
 }
@@ -110,10 +112,17 @@ All colors MUST be HSL.
     @apply bg-background text-foreground;
     font-family: var(--body-font), sans-serif;
     background-color: var(--background-color);
+    color: var(--text-color);
   }
 
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--header-font), serif;
+    color: var(--primary-color);
+  }
+
+  /* Navigation specific styling */
+  nav, .navigation {
+    font-family: var(--navigation-font), sans-serif;
   }
 
   /* Dynamic color classes */
@@ -129,12 +138,20 @@ All colors MUST be HSL.
     background-color: var(--accent-color);
   }
 
+  .bg-footer-dynamic {
+    background-color: var(--footer-color);
+  }
+
   .text-primary-dynamic {
     color: var(--primary-color);
   }
 
   .text-secondary-dynamic {
     color: var(--secondary-color);
+  }
+
+  .text-accent-dynamic {
+    color: var(--accent-color);
   }
 
   .border-primary-dynamic {
@@ -148,5 +165,14 @@ All colors MUST be HSL.
 
   .tab-trigger {
     border-radius: var(--tab-border-radius);
+  }
+
+  /* Links styling */
+  a {
+    color: var(--secondary-color);
+  }
+
+  a:hover {
+    color: var(--primary-color);
   }
 }

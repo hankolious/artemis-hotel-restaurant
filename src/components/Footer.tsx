@@ -1,14 +1,28 @@
 
 import { MapPin, Phone } from "lucide-react";
 import { SocialMediaLinks } from "./SocialMediaLinks";
+import { useWebsiteSettings } from "@/hooks/useWebsiteSettings";
 
 export const Footer = () => {
+  const { settings } = useWebsiteSettings();
+  
   return (
-    <footer className="bg-blue-900 text-white py-8 mt-16">
+    <footer 
+      className="text-white py-8 mt-16"
+      style={{ backgroundColor: settings.footer_color || '#1e3a8a' }}
+    >
       <div className="container mx-auto px-4">
         <div className="grid md:grid-cols-3 gap-6">
           <div>
-            <h3 className="text-xl font-bold mb-4" style={{ fontFamily: 'serif' }}>ARTEMIS</h3>
+            <h3 
+              className="text-xl font-bold mb-4" 
+              style={{ 
+                fontFamily: `var(--header-font), serif`,
+                color: '#ffffff'
+              }}
+            >
+              {settings.site_title || 'ARTEMIS'}
+            </h3>
             <p className="text-blue-200">
               Authentische griechische Küche{'\n'}
               Gemütliche Hotelzimmer{'\n'}
