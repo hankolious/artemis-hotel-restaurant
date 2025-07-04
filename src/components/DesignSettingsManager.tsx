@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -500,10 +499,11 @@ export const DesignSettingsManager = () => {
                 <Label htmlFor="facebook_url">Facebook URL</Label>
                 <Input
                   id="facebook_url"
-                  type="url"
+                  type="text"
                   value={getSetting('facebook_url')}
                   onChange={(e) => updateSetting('facebook_url', e.target.value)}
                   placeholder="https://facebook.com/yourpage"
+                  className="w-full"
                 />
               </div>
 
@@ -511,10 +511,11 @@ export const DesignSettingsManager = () => {
                 <Label htmlFor="instagram_url">Instagram URL</Label>
                 <Input
                   id="instagram_url"
-                  type="url"
+                  type="text"
                   value={getSetting('instagram_url')}
                   onChange={(e) => updateSetting('instagram_url', e.target.value)}
                   placeholder="https://instagram.com/yourprofile"
+                  className="w-full"
                 />
               </div>
 
@@ -522,10 +523,11 @@ export const DesignSettingsManager = () => {
                 <Label htmlFor="tiktok_url">TikTok URL</Label>
                 <Input
                   id="tiktok_url"
-                  type="url"
+                  type="text"
                   value={getSetting('tiktok_url')}
                   onChange={(e) => updateSetting('tiktok_url', e.target.value)}
                   placeholder="https://tiktok.com/@yourprofile"
+                  className="w-full"
                 />
               </div>
             </div>
