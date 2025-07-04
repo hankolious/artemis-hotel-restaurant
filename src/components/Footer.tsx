@@ -9,7 +9,7 @@ export const Footer = () => {
   return (
     <footer 
       className="text-white py-8 mt-16"
-      style={{ backgroundColor: settings.footer_color || '#1e3a8a' }}
+      style={{ backgroundColor: settings.footer_color || '#2694e8' }}
     >
       <div className="container mx-auto px-4">
         <div className="grid md:grid-cols-3 gap-6">
