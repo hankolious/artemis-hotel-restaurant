@@ -24,9 +24,9 @@ export const Footer = () => {
               {settings.site_title || 'ARTEMIS'}
             </h3>
             <p className="text-blue-200">
-              Authentische griechische Küche{'\n'}
-              Gemütliche Hotelzimmer{'\n'}
-              Herzliche Gastfreundschaft
+              {settings.footer_text_line1 || 'Authentische griechische Küche'}{'\n'}
+              {settings.footer_text_line2 || 'Gemütliche Hotelzimmer'}{'\n'}
+              {settings.footer_text_line3 || 'Herzliche Gastfreundschaft'}
             </p>
             <SocialMediaLinks />
           </div>
@@ -50,7 +50,9 @@ export const Footer = () => {
           </div>
         </div>
         <div className="border-t border-blue-800 mt-8 pt-6 text-center">
-          <p className="text-blue-300">&copy; 2024 Restaurant Artemis. Alle Rechte vorbehalten.</p>
+          <p className="text-blue-300">
+            {settings.copyright_text || '© 2024 Restaurant Artemis. Alle Rechte vorbehalten.'}
+          </p>
         </div>
       </div>
     </footer>

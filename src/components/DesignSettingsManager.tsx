@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Palette, Type, Image, Settings, Layout, FileImage, Share2 } from "lucide-react";
+import { Palette, Type, Image, Settings, Layout, FileImage, Share2, FileText } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 
@@ -125,7 +125,7 @@ export const DesignSettingsManager = () => {
       </CardHeader>
       <CardContent>
         <Tabs defaultValue="colors" className="w-full">
-          <TabsList className="grid w-full grid-cols-6">
+          <TabsList className="grid w-full grid-cols-7">
             <TabsTrigger value="colors" className="flex items-center">
               <Palette className="w-4 h-4 mr-1" />
               Farben
@@ -149,6 +149,10 @@ export const DesignSettingsManager = () => {
             <TabsTrigger value="social" className="flex items-center">
               <Share2 className="w-4 h-4 mr-1" />
               Social
+            </TabsTrigger>
+            <TabsTrigger value="content" className="flex items-center">
+              <FileText className="w-4 h-4 mr-1" />
+              Text
             </TabsTrigger>
           </TabsList>
 
@@ -521,6 +525,76 @@ export const DesignSettingsManager = () => {
                   value={getSetting('tiktok_url')}
                   onChange={(e) => updateSetting('tiktok_url', e.target.value)}
                   placeholder="https://tiktok.com/@yourprofile"
+                />
+              </div>
+            </div>
+          </TabsContent>
+
+          <TabsContent value="content" className="space-y-4">
+            <div className="space-y-4">
+              <div className="space-y-2">
+                <Label htmlFor="volume_text">Volumen Text (z.B. 4cl)</Label>
+                <Input
+                  id="volume_text"
+                  type="text"
+                  value={getSetting('volume_text')}
+                  onChange={(e) => updateSetting('volume_text', e.target.value)}
+                  placeholder="4cl"
+                />
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="alcohol_percentage_text">Alkoholgehalt Text (z.B. 15% Vol)</Label>
+                <Input
+                  id="alcohol_percentage_text"
+                  type="text"
+                  value={getSetting('alcohol_percentage_text')}
+                  onChange={(e) => updateSetting('alcohol_percentage_text', e.target.value)}
+                  placeholder="15% Vol"
+                />
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="footer_text_line1">Footer Text Zeile 1</Label>
+                <Input
+                  id="footer_text_line1"
+                  type="text"
+                  value={getSetting('footer_text_line1')}
+                  onChange={(e) => updateSetting('footer_text_line1', e.target.value)}
+                  placeholder="Authentische griechische Küche"
+                />
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="footer_text_line2">Footer Text Zeile 2</Label>
+                <Input
+                  id="footer_text_line2"
+                  type="text"
+                  value={getSetting('footer_text_line2')}
+                  onChange={(e) => updateSetting('footer_text_line2', e.target.value)}
+                  placeholder="Gemütliche Hotelzimmer"
+                />
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="footer_text_line3">Footer Text Zeile 3</Label>
+                <Input
+                  id="footer_text_line3"
+                  type="text"
+                  value={getSetting('footer_text_line3')}
+                  onChange={(e) => updateSetting('footer_text_line3', e.target.value)}
+                  placeholder="Herzliche Gastfreundschaft"
+                />
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="copyright_text">Copyright Text</Label>
+                <Input
+                  id="copyright_text"
+                  type="text"
+                  value={getSetting('copyright_text')}
+                  onChange={(e) => updateSetting('copyright_text', e.target.value)}
+                  placeholder="© 2024 Restaurant Artemis. Alle Rechte vorbehalten."
                 />
               </div>
             </div>

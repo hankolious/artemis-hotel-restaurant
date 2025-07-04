@@ -31,7 +31,7 @@ export const SocialMediaLinks = () => {
         return (
           <a
             key={social.name}
-            href={social.url}
+            href={social.url.startsWith('http') ? social.url : `https://${social.url}`}
             target="_blank"
             rel="noopener noreferrer"
             className="text-blue-200 hover:text-white transition-colors"
