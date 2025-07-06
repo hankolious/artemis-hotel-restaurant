@@ -495,41 +495,41 @@ export const DesignSettingsManager = () => {
 
           <TabsContent value="social" className="space-y-4">
             <div className="space-y-4">
-            <div className="space-y-2">
-              <Label htmlFor="facebook_url">Facebook URL</Label>
-              <Input
-                id="facebook_url"
-                type="text"
-                value={getSetting('facebook_url') || ''}
-                onChange={(e) => updateSetting('facebook_url', e.target.value)}
-                placeholder="https://facebook.com/yourpage"
-                className="w-full"
-              />
-            </div>
+              <div className="space-y-2">
+                <Label htmlFor="facebook_url">Facebook URL</Label>
+                <Input
+                  id="facebook_url"
+                  type="text"
+                  value={getSetting('facebook_url')}
+                  onChange={(e) => updateSetting('facebook_url', e.target.value)}
+                  placeholder="https://facebook.com/yourpage"
+                  className="w-full"
+                />
+              </div>
 
-            <div className="space-y-2">
-              <Label htmlFor="instagram_url">Instagram URL</Label>
-              <Input
-                id="instagram_url"
-                type="text"
-                value={getSetting('instagram_url') || ''}
-                onChange={(e) => updateSetting('instagram_url', e.target.value)}
-                placeholder="https://instagram.com/yourprofile"
-                className="w-full"
-              />
-            </div>
+              <div className="space-y-2">
+                <Label htmlFor="instagram_url">Instagram URL</Label>
+                <Input
+                  id="instagram_url"
+                  type="text"
+                  value={getSetting('instagram_url')}
+                  onChange={(e) => updateSetting('instagram_url', e.target.value)}
+                  placeholder="https://instagram.com/yourprofile"
+                  className="w-full"
+                />
+              </div>
 
-            <div className="space-y-2">
-              <Label htmlFor="tiktok_url">TikTok URL</Label>
-              <Input
-                id="tiktok_url"
-                type="text"
-                value={getSetting('tiktok_url') || ''}
-                onChange={(e) => updateSetting('tiktok_url', e.target.value)}
-                placeholder="https://tiktok.com/@yourprofile"
-                className="w-full"
-              />
-            </div>
+              <div className="space-y-2">
+                <Label htmlFor="tiktok_url">TikTok URL</Label>
+                <Input
+                  id="tiktok_url"
+                  type="text"
+                  value={getSetting('tiktok_url')}
+                  onChange={(e) => updateSetting('tiktok_url', e.target.value)}
+                  placeholder="https://tiktok.com/@yourprofile"
+                  className="w-full"
+                />
+              </div>
             </div>
           </TabsContent>
 
