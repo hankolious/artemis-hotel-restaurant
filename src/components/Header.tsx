@@ -40,7 +40,7 @@ export const Header = ({ onShowAdminPanel }: HeaderProps) => {
               <img 
                 src={settings.logo_url} 
                 alt="Logo" 
-                className="h-12 w-12 md:h-16 md:w-16 object-contain"
+                className="h-6 w-6 md:h-8 md:w-8 object-contain"
               />
             )}
             <div className="text-center md:text-left">
