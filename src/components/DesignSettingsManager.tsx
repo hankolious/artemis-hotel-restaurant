@@ -27,6 +27,13 @@ export const DesignSettingsManager = () => {
 
   useEffect(() => {
     fetchSettings();
+    
+    // Cleanup timeout on component unmount
+    return () => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+    };
   }, []);
 
   const fetchSettings = async () => {
@@ -106,7 +113,7 @@ export const DesignSettingsManager = () => {
     timeoutRef.current = setTimeout(() => {
       updateSetting(settingKey, value);
     }, 500);
-  }, []);
+  }, [updateSetting]);
 
   const getSetting = (key: string) => {
     return settings.find(setting => setting.setting_key === key)?.setting_value || '';
