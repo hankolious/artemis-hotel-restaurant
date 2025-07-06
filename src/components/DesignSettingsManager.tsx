@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -85,6 +85,28 @@ export const DesignSettingsManager = () => {
       setSaving(false);
     }
   };
+
+  // Debounced update for text inputs
+  const timeoutRef = useRef<NodeJS.Timeout>();
+  
+  const debouncedUpdateSetting = useCallback((settingKey: string, value: string) => {
+    // Update local state immediately for responsive UI
+    setSettings(prev => prev.map(setting => 
+      setting.setting_key === settingKey 
+        ? { ...setting, setting_value: value }
+        : setting
+    ));
+
+    // Clear existing timeout
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
+
+    // Set new timeout to save after 500ms
+    timeoutRef.current = setTimeout(() => {
+      updateSetting(settingKey, value);
+    }, 500);
+  }, []);
 
   const getSetting = (key: string) => {
     return settings.find(setting => setting.setting_key === key)?.setting_value || '';
@@ -501,7 +523,7 @@ export const DesignSettingsManager = () => {
                   id="facebook_url"
                   type="text"
                   value={getSetting('facebook_url')}
-                  onChange={(e) => updateSetting('facebook_url', e.target.value)}
+                  onChange={(e) => debouncedUpdateSetting('facebook_url', e.target.value)}
                   placeholder="https://facebook.com/yourpage"
                   className="w-full"
                 />
@@ -513,7 +535,7 @@ export const DesignSettingsManager = () => {
                   id="instagram_url"
                   type="text"
                   value={getSetting('instagram_url')}
-                  onChange={(e) => updateSetting('instagram_url', e.target.value)}
+                  onChange={(e) => debouncedUpdateSetting('instagram_url', e.target.value)}
                   placeholder="https://instagram.com/yourprofile"
                   className="w-full"
                 />
@@ -525,7 +547,7 @@ export const DesignSettingsManager = () => {
                   id="tiktok_url"
                   type="text"
                   value={getSetting('tiktok_url')}
-                  onChange={(e) => updateSetting('tiktok_url', e.target.value)}
+                  onChange={(e) => debouncedUpdateSetting('tiktok_url', e.target.value)}
                   placeholder="https://tiktok.com/@yourprofile"
                   className="w-full"
                 />
