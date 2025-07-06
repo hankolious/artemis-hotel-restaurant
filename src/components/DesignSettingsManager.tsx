@@ -572,8 +572,8 @@ export const DesignSettingsManager = () => {
                     <Input
                       id="volume_text"
                       type="text"
-                      value={getSetting('volume_text')}
-                      onChange={(e) => updateSetting('volume_text', e.target.value)}
+                      defaultValue={getSetting('volume_text')}
+                      onBlur={(e) => updateSetting('volume_text', e.target.value)}
                       placeholder="4cl"
                     />
                   </div>
@@ -583,8 +583,8 @@ export const DesignSettingsManager = () => {
                     <Input
                       id="alcohol_percentage_text"
                       type="text"
-                      value={getSetting('alcohol_percentage_text')}
-                      onChange={(e) => updateSetting('alcohol_percentage_text', e.target.value)}
+                      defaultValue={getSetting('alcohol_percentage_text')}
+                      onBlur={(e) => updateSetting('alcohol_percentage_text', e.target.value)}
                       placeholder="15% Vol"
                     />
                   </div>
@@ -639,8 +639,8 @@ export const DesignSettingsManager = () => {
                     <Input
                       id="footer_text_line1"
                       type="text"
-                      value={getSetting('footer_text_line1')}
-                      onChange={(e) => updateSetting('footer_text_line1', e.target.value)}
+                      defaultValue={getSetting('footer_text_line1')}
+                      onBlur={(e) => updateSetting('footer_text_line1', e.target.value)}
                       placeholder="Authentische griechische Küche"
                     />
                   </div>
@@ -650,8 +650,8 @@ export const DesignSettingsManager = () => {
                     <Input
                       id="footer_text_line2"
                       type="text"
-                      value={getSetting('footer_text_line2')}
-                      onChange={(e) => updateSetting('footer_text_line2', e.target.value)}
+                      defaultValue={getSetting('footer_text_line2')}
+                      onBlur={(e) => updateSetting('footer_text_line2', e.target.value)}
                       placeholder="Gemütliche Hotelzimmer"
                     />
                   </div>
@@ -661,8 +661,8 @@ export const DesignSettingsManager = () => {
                     <Input
                       id="footer_text_line3"
                       type="text"
-                      value={getSetting('footer_text_line3')}
-                      onChange={(e) => updateSetting('footer_text_line3', e.target.value)}
+                      defaultValue={getSetting('footer_text_line3')}
+                      onBlur={(e) => updateSetting('footer_text_line3', e.target.value)}
                       placeholder="Herzliche Gastfreundschaft"
                     />
                   </div>
@@ -672,8 +672,8 @@ export const DesignSettingsManager = () => {
                     <Input
                       id="copyright_text"
                       type="text"
-                      value={getSetting('copyright_text')}
-                      onChange={(e) => updateSetting('copyright_text', e.target.value)}
+                      defaultValue={getSetting('copyright_text')}
+                      onBlur={(e) => updateSetting('copyright_text', e.target.value)}
                       placeholder="© 2024 Restaurant Artemis. Alle Rechte vorbehalten."
                     />
                   </div>
