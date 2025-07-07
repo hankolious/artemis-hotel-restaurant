@@ -11,7 +11,7 @@ import { MenuItemsManager } from "./MenuItemsManager";
 import { HotelRoomsManager } from "./HotelRoomsManager";
 import { ReviewsManager } from "./ReviewsManager";
 import { ImagesManager } from "./ImagesManager";
-import { DesignSettingsManager } from "./DesignSettingsManager";
+import { NewDesignSettingsManager } from "./admin/NewDesignSettingsManager";
 import { SpecialEventsManager } from "./SpecialEventsManager";
 import { AdminUserManager } from "./AdminUserManager";
 
@@ -129,7 +129,7 @@ export const AdminPanel = ({ onClose }: AdminPanelProps) => {
             </TabsContent>
 
             <TabsContent value="design" className="mt-0">
-              <DesignSettingsManager />
+              <NewDesignSettingsManager />
             </TabsContent>
 
             <TabsContent value="admins" className="mt-0">
