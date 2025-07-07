@@ -529,8 +529,8 @@ export const DesignSettingsManager = () => {
                 <Input
                   id="facebook_url"
                   type="text"
-                  defaultValue={getSetting('facebook_url')}
-                  onBlur={(e) => updateSetting('facebook_url', e.target.value)}
+                  value={getSetting('facebook_url')}
+                  onChange={(e) => debouncedUpdateSetting('facebook_url', e.target.value)}
                   placeholder="https://facebook.com/yourpage"
                   className="w-full"
                 />
@@ -541,8 +541,8 @@ export const DesignSettingsManager = () => {
                 <Input
                   id="instagram_url"
                   type="text"
-                  defaultValue={getSetting('instagram_url')}
-                  onBlur={(e) => updateSetting('instagram_url', e.target.value)}
+                  value={getSetting('instagram_url')}
+                  onChange={(e) => debouncedUpdateSetting('instagram_url', e.target.value)}
                   placeholder="https://instagram.com/yourprofile"
                   className="w-full"
                 />
@@ -553,8 +553,8 @@ export const DesignSettingsManager = () => {
                 <Input
                   id="tiktok_url"
                   type="text"
-                  defaultValue={getSetting('tiktok_url')}
-                  onBlur={(e) => updateSetting('tiktok_url', e.target.value)}
+                  value={getSetting('tiktok_url')}
+                  onChange={(e) => debouncedUpdateSetting('tiktok_url', e.target.value)}
                   placeholder="https://tiktok.com/@yourprofile"
                   className="w-full"
                 />
