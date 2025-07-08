@@ -9,7 +9,7 @@ export const Footer = () => {
     backgroundColor: settings.footer_color || '#2694e8'
   }}>
       <div className="container mx-auto px-4">
-        <div className="grid md:grid-cols-3 gap-6 text-white">
+        <div className="grid md:grid-cols-3 gap-6">
           <div>
             <h3 style={{
             fontFamily: `var(--header-font), serif`,
@@ -42,7 +42,7 @@ export const Footer = () => {
             <p style={{
             color: settings.footer_text_color || '#93c5fd',
             fontFamily: settings.footer_text_font ? `${settings.footer_text_font}, sans-serif` : 'inherit'
-          }}>
+          }} className="text-slate-50">
               <Phone className="w-4 h-4 inline mr-2" />
               06353 - 93 220 70
             </p>
