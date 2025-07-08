@@ -20,6 +20,7 @@ const textSettings: TextSetting[] = [
   { key: 'site_subtitle', label: 'Website Untertitel', type: 'text', defaultValue: 'Griechisches Restaurant & Hotel', description: 'Untertitel in der Navigation' },
   { key: 'banner_title', label: 'Banner Titel', type: 'text', defaultValue: 'Willkommen bei ARTEMIS', description: 'Titel im Hero-Banner' },
   { key: 'banner_subtitle', label: 'Banner Untertitel', type: 'text', defaultValue: 'Erleben Sie authentische griechische Küche', description: 'Untertitel im Hero-Banner' },
+  { key: 'opening_hours', label: 'Öffnungszeiten', type: 'text', defaultValue: '17:30', description: 'Öffnungszeit des Restaurants' },
   { key: 'restaurant_description', label: 'Restaurant Beschreibung', type: 'textarea', defaultValue: 'Willkommen im ARTEMIS - Ihrem griechischen Restaurant mit authentischer Küche und herzlicher Gastfreundschaft.', description: 'Hauptbeschreibung des Restaurants' },
   { key: 'about_text', label: 'Über uns Text', type: 'textarea', defaultValue: 'Seit über 20 Jahren verwöhnen wir unsere Gäste mit traditionellen griechischen Spezialitäten in familiärer Atmosphäre.', description: 'Text für die Über uns Sektion' },
   { key: 'contact_info', label: 'Kontakt Information', type: 'textarea', defaultValue: 'Besuchen Sie uns oder reservieren Sie telefonisch einen Tisch für ein unvergessliches kulinarisches Erlebnis.', description: 'Kontakt und Reservierungstext' },

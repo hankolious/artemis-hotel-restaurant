@@ -46,6 +46,14 @@ export const Footer = () => {
               <Phone className="w-4 h-4 inline mr-2" />
               06353 - 93 220 70
             </p>
+            {settings.opening_hours && (
+              <p style={{
+                color: settings.footer_text_color || '#93c5fd',
+                fontFamily: settings.footer_text_font ? `${settings.footer_text_font}, sans-serif` : 'inherit'
+              }} className="text-slate-50 mt-2">
+                Öffnungszeiten: ab {settings.opening_hours} Uhr
+              </p>
+            )}
           </div>
           <div>
             <h4 className="font-semibold mb-4" style={{
