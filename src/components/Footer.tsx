@@ -9,7 +9,7 @@ export const Footer = () => {
     backgroundColor: settings.footer_color || '#2694e8'
   }}>
       <div className="container mx-auto px-4">
-        <div className="grid md:grid-cols-3 gap-6">
+        <div className="grid md:grid-cols-3 gap-6 text-white">
           <div>
             <h3 style={{
             fontFamily: `var(--header-font), serif`,
