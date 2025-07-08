@@ -30,7 +30,7 @@ export const Footer = () => {
           </div>
           <div>
             <h4 className="font-semibold mb-4" style={{
-            color: '#940505'
+            color: '#ffffff'
           }}>Kontakt</h4>
             <p className="mb-2" style={{
             color: settings.footer_text_color || '#93c5fd',
