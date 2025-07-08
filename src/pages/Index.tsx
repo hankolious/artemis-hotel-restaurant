@@ -11,7 +11,7 @@ import { GuestReviewForm } from "@/components/GuestReviewForm";
 import { LocationMap } from "@/components/LocationMap";
 import { AdminPanel } from "@/components/AdminPanel";
 import { GuestReviews } from "@/components/GuestReviews";
-import { SpecialEventsDisplay } from "@/components/SpecialEventsDisplay";
+import { Events } from "@/components/Events";
 import { useWebsiteSettings } from "@/hooks/useWebsiteSettings";
 
 const Index = () => {
@@ -91,7 +91,7 @@ const Index = () => {
           </TabsContent>
 
           <TabsContent value="events" className="mt-8">
-            <SpecialEventsDisplay />
+            <Events />
           </TabsContent>
 
           <TabsContent value="location" className="mt-8">
