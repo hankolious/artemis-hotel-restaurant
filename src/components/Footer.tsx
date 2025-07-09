@@ -38,7 +38,7 @@ export const Footer = () => {
             fontFamily: settings.footer_text_font ? `${settings.footer_text_font}, sans-serif` : 'inherit'
           }}>
               <MapPin className="w-4 h-4 inline mr-2" />
-              Am Nussbaum 6, 67273 Weisenheim am Berg
+              Am Nussbaum 6       67273 Weisenheim am Berg
             </p>
             <p style={{
             color: settings.footer_text_color || '#93c5fd',
