@@ -58,7 +58,7 @@ export const Footer = () => {
           </div>
           <div>
             <h4 className="font-semibold mb-4" style={{
-            color: '#940505'
+            color: '#ffffff'
           }}>Über Artemis</h4>
             <p className="text-sm" style={{
             color: settings.footer_text_color || '#93c5fd',
