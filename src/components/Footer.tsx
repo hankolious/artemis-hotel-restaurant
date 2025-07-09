@@ -1,6 +1,7 @@
 import { MapPin, Phone } from "lucide-react";
 import { SocialMediaLinks } from "./SocialMediaLinks";
 import { useWebsiteSettings } from "@/hooks/useWebsiteSettings";
+
 export const Footer = () => {
   const {
     settings
@@ -9,7 +10,7 @@ export const Footer = () => {
     backgroundColor: settings.footer_color || '#2694e8'
   }}>
       <div className="container mx-auto px-4">
-        <div className="grid md:grid-cols-3 gap-6 text-white">
+        <div className="grid md:grid-cols-3 gap-6 text-white" style={{ color: '#ffffff' }}>
           <div>
             <h3 style={{
             fontFamily: `var(--header-font), serif`,
