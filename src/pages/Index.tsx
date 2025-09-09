@@ -12,6 +12,7 @@ import { LocationMap } from "@/components/LocationMap";
 import { AdminPanel } from "@/components/AdminPanel";
 import { GuestReviews } from "@/components/GuestReviews";
 import { Events } from "@/components/Events";
+import { Impressum } from "@/components/Impressum";
 import { useWebsiteSettings } from "@/hooks/useWebsiteSettings";
 
 const Index = () => {
@@ -40,7 +41,7 @@ const Index = () => {
         }}
       />
       
-      <Header onShowAdminPanel={() => setShowAdminPanel(true)} />
+      <Header />
       
       {/* Hero Banner Section */}
       <div className="relative w-full h-96 overflow-hidden">
@@ -110,6 +111,10 @@ const Index = () => {
           <TabsContent value="gallery" className="mt-8">
             <Gallery />
           </TabsContent>
+
+          <TabsContent value="impressum" className="mt-8">
+            <Impressum />
+          </TabsContent>
         </Tabs>
       </div>
 
@@ -117,7 +122,10 @@ const Index = () => {
         <AdminPanel onClose={() => setShowAdminPanel(false)} />
       )}
 
-      <Footer />
+      <Footer 
+        onShowAdminPanel={() => setShowAdminPanel(true)} 
+        onTabChange={setSelectedTab}
+      />
     </div>
   );
 };

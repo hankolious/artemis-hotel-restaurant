@@ -1,11 +1,11 @@
 import { Button } from "@/components/ui/button";
 import { useWebsiteSettings } from "@/hooks/useWebsiteSettings";
 interface HeaderProps {
-  onShowAdminPanel: () => void;
+  onShowAdminPanel?: () => void;
 }
 export const Header = ({
   onShowAdminPanel
-}: HeaderProps) => {
+}: HeaderProps = {}) => {
   const {
     settings
   } = useWebsiteSettings();
@@ -18,12 +18,6 @@ export const Header = ({
   }}>
       <div className="container mx-auto px-4 py-6">
         <div className="flex items-center justify-between">
-          {/* Mobile Admin Button - Top Left */}
-          <div className="md:hidden absolute top-4 left-4 z-20">
-            <Button variant="outline" size="sm" onClick={onShowAdminPanel} className="border-primary-dynamic text-primary-dynamic hover:bg-primary-dynamic hover:text-white text-sm">
-              Admin
-            </Button>
-          </div>
 
           <div className="flex items-center space-x-4 flex-1 md:flex-none">
             {settings.logo_url && <img src={settings.logo_url} alt="Logo" className="h-6 w-6 md:h-8 md:w-8 object-contain" />}
@@ -43,13 +37,6 @@ export const Header = ({
           </div>
 
           <div className="flex items-center space-x-2 md:space-x-4">
-            {/* Desktop Admin Button */}
-            <div className="hidden md:block">
-              <Button variant="outline" onClick={onShowAdminPanel} className="border-primary-dynamic text-primary-dynamic hover:bg-primary-dynamic hover:text-white">
-                Admin
-              </Button>
-            </div>
-            
             <div className="text-right" style={{
             color: settings.text_color || '#1e293b'
           }}>

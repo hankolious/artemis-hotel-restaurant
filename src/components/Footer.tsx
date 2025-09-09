@@ -1,11 +1,15 @@
-import { MapPin, Phone } from "lucide-react";
+import { MapPin, Phone, Settings, FileText } from "lucide-react";
 import { SocialMediaLinks } from "./SocialMediaLinks";
 import { useWebsiteSettings } from "@/hooks/useWebsiteSettings";
+import { Button } from "@/components/ui/button";
 
-export const Footer = () => {
-  const {
-    settings
-  } = useWebsiteSettings();
+interface FooterProps {
+  onShowAdminPanel: () => void;
+  onTabChange: (tab: string) => void;
+}
+
+export const Footer = ({ onShowAdminPanel, onTabChange }: FooterProps) => {
+  const { settings } = useWebsiteSettings();
   return <footer className="text-white py-8 mt-16" style={{
     backgroundColor: settings.footer_color || '#2694e8'
   }}>
@@ -70,13 +74,35 @@ export const Footer = () => {
             </p>
           </div>
         </div>
-        <div className="border-t border-blue-800 mt-8 pt-6 text-center">
-          <p style={{
-          color: settings.footer_text_color || '#93c5fd',
-          fontFamily: settings.footer_text_font ? `${settings.footer_text_font}, sans-serif` : 'inherit'
-        }}>
-            {settings.copyright_text || '© 2024 Restaurant Artemis. Alle Rechte vorbehalten.'}
-          </p>
+        <div className="border-t border-white/20 mt-8 pt-6">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+            <p style={{
+              color: settings.footer_text_color || '#e2e8f0',
+              fontFamily: settings.footer_text_font ? `${settings.footer_text_font}, sans-serif` : 'inherit'
+            }} className="text-center md:text-left">
+              {settings.copyright_text || '© 2024 Restaurant Artemis. Alle Rechte vorbehalten.'}
+            </p>
+            <div className="flex gap-3">
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => onTabChange('impressum')}
+                className="text-white hover:text-primary hover:bg-white/10 transition-all duration-300"
+              >
+                <FileText className="w-4 h-4 mr-2" />
+                Impressum
+              </Button>
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={onShowAdminPanel}
+                className="text-white hover:text-primary hover:bg-white/10 transition-all duration-300"
+              >
+                <Settings className="w-4 h-4 mr-2" />
+                Admin
+              </Button>
+            </div>
+          </div>
         </div>
       </div>
     </footer>;
