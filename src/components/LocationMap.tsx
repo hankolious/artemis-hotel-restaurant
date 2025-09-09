@@ -90,16 +90,15 @@ export const LocationMap = () => {
             <CardContent className="p-6">
               <div className="space-y-3">
                 <div>
-                  <p className="text-blue-700 font-medium">Montag - Samstag</p>
-                  <p className="text-blue-600">17:30 - 22:00</p>
+                  <p className="text-blue-700 font-medium">Mo, Di, Do, Fr, Sa</p>
+                  <p className="text-blue-600">17:30 - 22:00 Uhr</p>
                 </div>
                 <div>
-                  <p className="text-blue-700 font-medium">Sonntag und Feiertage</p>
-                  <p className="text-blue-600">12:00 - 14:30</p>
-                  <p className="text-blue-600">17:30 - 22:00</p>
+                  <p className="text-blue-700 font-medium">Sonntag & Feiertage</p>
+                  <p className="text-blue-600">12:00 - 14:30 Uhr & 17:30 - 22:00 Uhr</p>
                 </div>
                 <div>
-                  <p className="text-red-600 font-medium">Mittwoch Ruhetag</p>
+                  <p className="text-red-600 font-medium">Mittwochs Ruhetag</p>
                 </div>
               </div>
             </CardContent>

@@ -11,17 +11,20 @@ export const Impressum = () => {
             Impressum
           </CardTitle>
         </CardHeader>
-        <CardContent className="space-y-6">
+        <CardContent className="space-y-8">
           <div className="text-center border-b pb-4">
-            <h2 className="text-2xl font-semibold text-primary mb-2">
-              Hotel Restaurant Artemis
+            <h2 className="text-sm font-medium text-muted-foreground mb-2">
+              Angaben gemäß § 5 TMG
             </h2>
+            <h3 className="text-2xl font-semibold text-primary mb-2">
+              Hotel Restaurant Artemis
+            </h3>
             <p className="text-lg text-muted-foreground">
               Inhaberin: Panagiota Goga
             </p>
           </div>
 
-          <div className="space-y-4">
+          <div className="space-y-6">
             <div className="flex items-start gap-3">
               <MapPin className="w-5 h-5 text-accent mt-1 flex-shrink-0" />
               <div>
@@ -36,24 +39,43 @@ export const Impressum = () => {
             <div className="flex items-start gap-3">
               <Phone className="w-5 h-5 text-accent mt-1 flex-shrink-0" />
               <div>
-                <h3 className="font-semibold text-foreground">Telefon</h3>
-                <p className="text-muted-foreground">06353 507223</p>
-              </div>
-            </div>
-
-            <div className="flex items-start gap-3">
-              <Mail className="w-5 h-5 text-accent mt-1 flex-shrink-0" />
-              <div>
-                <h3 className="font-semibold text-foreground">E-Mail</h3>
-                <p className="text-muted-foreground">restaurant-artemis68@web.de</p>
+                <h3 className="font-semibold text-foreground">Kontakt</h3>
+                <p className="text-muted-foreground">
+                  Telefon: 06353 507223<br />
+                  E-Mail: restaurant-artemis68@web.de
+                </p>
               </div>
             </div>
 
             <div className="flex items-start gap-3">
               <FileText className="w-5 h-5 text-accent mt-1 flex-shrink-0" />
               <div>
-                <h3 className="font-semibold text-foreground">Steuer-ID</h3>
-                <p className="text-muted-foreground">IdNr: 62483005917</p>
+                <h3 className="font-semibold text-foreground">Umsatzsteuer-ID</h3>
+                <p className="text-muted-foreground">
+                  Umsatzsteuer-Identifikationsnummer gemäß § 27a Umsatzsteuergesetz:<br />
+                  DE62483005917
+                </p>
+              </div>
+            </div>
+
+            <div className="flex items-start gap-3">
+              <FileText className="w-5 h-5 text-accent mt-1 flex-shrink-0" />
+              <div>
+                <h3 className="font-semibold text-foreground">Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV</h3>
+                <p className="text-muted-foreground">
+                  Panagiota Goga<br />
+                  Am Nussbaum 6<br />
+                  67273 Weisenheim am Berg
+                </p>
+              </div>
+            </div>
+
+            <div className="border-t pt-6">
+              <h3 className="font-semibold text-foreground mb-3">Öffnungszeiten</h3>
+              <div className="text-muted-foreground space-y-1">
+                <p>Mo, Di, Do, Fr, Sa: 17:30 - 22:00 Uhr</p>
+                <p>So & Feiertage: 12:00 - 14:30 Uhr & 17:30 - 22:00 Uhr</p>
+                <p className="font-medium">Mittwochs Ruhetag</p>
               </div>
             </div>
           </div>

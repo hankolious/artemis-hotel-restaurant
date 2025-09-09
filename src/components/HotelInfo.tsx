@@ -87,7 +87,7 @@ export const HotelInfo = () => {
             <div>
               <h4 className="font-semibold text-blue-900 mb-2 text-sm md:text-base">Restaurant</h4>
               <p className="text-blue-700 whitespace-pre-line text-xs md:text-sm">
-                Mo. - Sa.{'\n'}17:30 - 22:00{'\n\n'}So. und Feiertage{'\n'}12:00 - 14:30{'\n'}17:30 - 22:00{'\n\n'}* Mittwoch Ruhetag
+                Mo, Di, Do, Fr, Sa{'\n'}17:30 - 22:00 Uhr{'\n\n'}So & Feiertage{'\n'}12:00 - 14:30 Uhr &{'\n'}17:30 - 22:00 Uhr{'\n\n'}Mittwochs Ruhetag
               </p>
             </div>
             <div>
