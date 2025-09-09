@@ -53,12 +53,17 @@ export const Footer = ({ onShowAdminPanel, onTabChange }: FooterProps) => {
               06353 - 93 220 70
             </p>
             {settings.opening_hours && (
-              <p style={{
+              <div style={{
                 color: settings.footer_text_color || '#93c5fd',
                 fontFamily: settings.footer_text_font ? `${settings.footer_text_font}, sans-serif` : 'inherit'
-              }} className="text-slate-50 mt-2">
-                Öffnungszeiten: ab {settings.opening_hours} Uhr
-              </p>
+              }} className="text-slate-50 mt-4">
+                <h5 className="font-semibold mb-2" style={{ color: '#ffffff' }}>Öffnungszeiten</h5>
+                <div className="text-sm space-y-1">
+                  <p>Mo, Di, Do, Fr, Sa: 17:30 - 22:00 Uhr</p>
+                  <p>So & Feiertage: 12:00 - 14:30 Uhr & 17:30 - 22:00 Uhr</p>
+                  <p className="font-medium">Mittwochs Ruhetag</p>
+                </div>
+              </div>
             )}
           </div>
           <div>
