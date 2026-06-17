@@ -12,26 +12,23 @@ export const useWebsiteSettings = () => {
 
   useEffect(() => {
     fetchSettings();
-    
-    // Subscribe to real-time changes
-    const subscription = supabase
-      .channel('website-settings-changes')
-      .on('postgres_changes', 
-        { 
-          event: '*', 
-          schema: 'public', 
-          table: 'website_settings' 
-        }, 
-        () => {
-          fetchSettings();
-        }
-      )
-      .subscribe();
+
+    // Subscribe to real-time changes — register listener BEFORE subscribe()
+    const channel = supabase.channel('website-settings-changes');
+    channel.on(
+      'postgres_changes' as any,
+      { event: '*', schema: 'public', table: 'website_settings' },
+      () => {
+        fetchSettings();
+      }
+    );
+    channel.subscribe();
 
     return () => {
-      subscription.unsubscribe();
+      supabase.removeChannel(channel);
     };
   }, []);
+
 
   const fetchSettings = async () => {
     try {
