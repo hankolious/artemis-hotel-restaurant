@@ -94,7 +94,7 @@ export const DesignSettingsManager = () => {
   };
 
   // Debounced update for text inputs
-  const timeoutRef = useRef<NodeJS.Timeout>();
+  const timeoutRef = useRef<ReturnType<typeof setTimeout>>();
   
   const debouncedUpdateSetting = useCallback((settingKey: string, value: string) => {
     // Update local state immediately for responsive UI
