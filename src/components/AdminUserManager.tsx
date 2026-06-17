@@ -182,7 +182,30 @@ export const AdminUserManager = () => {
 
   return (
     <div className="space-y-4 md:space-y-6">
+      <Card className="border-blue-300">
+        <CardHeader>
+          <CardTitle className="text-blue-900 flex items-center text-lg md:text-xl">
+            <Download className="w-4 h-4 md:w-5 md:h-5 mr-2" />
+            Daten-Export (Blockchain-Migration)
+          </CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-3">
+          <p className="text-sm text-gray-600">
+            Lädt alle Daten des Projekts (Menü, Hotelzimmer, Reviews, Bilder, Events, Settings, Profile, Rollen) als JSON-Datei herunter. Läuft serverseitig mit Admin-Rechten – RLS wird umgangen.
+          </p>
+          <Button
+            onClick={handleExport}
+            disabled={isExporting}
+            className="w-full md:w-auto bg-blue-600 hover:bg-blue-700"
+          >
+            <Download className="w-4 h-4 mr-2" />
+            {isExporting ? "Exportiere..." : "Vollständigen Export herunterladen"}
+          </Button>
+        </CardContent>
+      </Card>
+
       <Card>
+
         <CardHeader>
           <CardTitle className="text-blue-900 flex items-center text-lg md:text-xl">
             <UserPlus className="w-4 h-4 md:w-5 md:h-5 mr-2" />
