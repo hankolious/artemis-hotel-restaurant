@@ -20,6 +20,41 @@ export const AdminUserManager = () => {
   const [newAdminEmail, setNewAdminEmail] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isLoadingList, setIsLoadingList] = useState(true);
+  const [isExporting, setIsExporting] = useState(false);
+  const { toast } = useToast();
+
+  const handleExport = async () => {
+    try {
+      setIsExporting(true);
+      const { data, error } = await supabase.functions.invoke('admin-export-data');
+      if (error) throw error;
+
+      const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      const date = new Date().toISOString().slice(0, 10);
+      a.download = `artemis-export-${date}.json`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+
+      toast({
+        title: "Export erfolgreich",
+        description: "Die JSON-Datei mit allen Daten wurde heruntergeladen.",
+      });
+    } catch (e: any) {
+      console.error('Export error:', e);
+      toast({
+        title: "Export fehlgeschlagen",
+        description: e?.message ?? "Unbekannter Fehler beim Export.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsExporting(false);
+    }
+  };
   const { toast } = useToast();
 
   const fetchAdminUsers = async () => {
