@@ -13,16 +13,19 @@ export const useWebsiteSettings = () => {
   useEffect(() => {
     fetchSettings();
 
-    // Subscribe to real-time changes — register listener BEFORE subscribe()
-    const channel = supabase.channel('website-settings-changes');
-    channel.on(
-      'postgres_changes' as any,
-      { event: '*', schema: 'public', table: 'website_settings' },
-      () => {
-        fetchSettings();
-      }
-    );
-    channel.subscribe();
+    // Unique channel name per mount to avoid reusing an already-subscribed
+    // channel after HMR / StrictMode remounts (which causes
+    // "cannot add postgres_changes callbacks after subscribe()").
+    const channel = supabase
+      .channel(`website-settings-changes-${Math.random().toString(36).slice(2)}`)
+      .on(
+        'postgres_changes' as any,
+        { event: '*', schema: 'public', table: 'website_settings' },
+        () => {
+          fetchSettings();
+        }
+      )
+      .subscribe();
 
     return () => {
       supabase.removeChannel(channel);
