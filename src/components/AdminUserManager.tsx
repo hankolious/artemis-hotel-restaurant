@@ -6,7 +6,7 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
-import { UserPlus, UserMinus, Users } from "lucide-react";
+import { UserPlus, UserMinus, Users, Download } from "lucide-react";
 
 interface AdminUser {
   id: string;
@@ -20,7 +20,43 @@ export const AdminUserManager = () => {
   const [newAdminEmail, setNewAdminEmail] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isLoadingList, setIsLoadingList] = useState(true);
+  const [isExporting, setIsExporting] = useState(false);
   const { toast } = useToast();
+
+  const handleExport = async () => {
+    try {
+      setIsExporting(true);
+      const { data, error } = await supabase.functions.invoke('admin-export-data');
+      if (error) throw error;
+
+      const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      const date = new Date().toISOString().slice(0, 10);
+      a.download = `artemis-export-${date}.json`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+
+      toast({
+        title: "Export erfolgreich",
+        description: "Die JSON-Datei mit allen Daten wurde heruntergeladen.",
+      });
+    } catch (e: any) {
+      console.error('Export error:', e);
+      toast({
+        title: "Export fehlgeschlagen",
+        description: e?.message ?? "Unbekannter Fehler beim Export.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsExporting(false);
+    }
+  };
+
+
 
   const fetchAdminUsers = async () => {
     try {
@@ -146,7 +182,30 @@ export const AdminUserManager = () => {
 
   return (
     <div className="space-y-4 md:space-y-6">
+      <Card className="border-blue-300">
+        <CardHeader>
+          <CardTitle className="text-blue-900 flex items-center text-lg md:text-xl">
+            <Download className="w-4 h-4 md:w-5 md:h-5 mr-2" />
+            Daten-Export (Blockchain-Migration)
+          </CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-3">
+          <p className="text-sm text-gray-600">
+            Lädt alle Daten des Projekts (Menü, Hotelzimmer, Reviews, Bilder, Events, Settings, Profile, Rollen) als JSON-Datei herunter. Läuft serverseitig mit Admin-Rechten – RLS wird umgangen.
+          </p>
+          <Button
+            onClick={handleExport}
+            disabled={isExporting}
+            className="w-full md:w-auto bg-blue-600 hover:bg-blue-700"
+          >
+            <Download className="w-4 h-4 mr-2" />
+            {isExporting ? "Exportiere..." : "Vollständigen Export herunterladen"}
+          </Button>
+        </CardContent>
+      </Card>
+
       <Card>
+
         <CardHeader>
           <CardTitle className="text-blue-900 flex items-center text-lg md:text-xl">
             <UserPlus className="w-4 h-4 md:w-5 md:h-5 mr-2" />
