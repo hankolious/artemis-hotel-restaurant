@@ -1,3 +1,5 @@
+// Edge Function: admin-export-data
+// Exports all project data as JSON for admins (bypasses RLS via service role).
 import { createClient } from 'npm:@supabase/supabase-js@2';
 
 const corsHeaders = {
@@ -41,19 +43,20 @@ Deno.serve(async (req) => {
     const ANON_KEY = Deno.env.get('SUPABASE_ANON_KEY')!;
     const SERVICE_KEY = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!;
 
+    const token = authHeader.replace('Bearer ', '');
+
     const userClient = createClient(SUPABASE_URL, ANON_KEY, {
       global: { headers: { Authorization: authHeader } },
     });
 
-    const token = authHeader.replace('Bearer ', '');
-    const { data: claimsData, error: claimsError } = await userClient.auth.getClaims(token);
-    if (claimsError || !claimsData?.claims) {
-      return new Response(JSON.stringify({ error: 'Unauthorized' }), {
+    const { data: userData, error: userErr } = await userClient.auth.getUser(token);
+    if (userErr || !userData?.user) {
+      return new Response(JSON.stringify({ error: 'Unauthorized', detail: userErr?.message }), {
         status: 401,
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },
       });
     }
-    const userId = claimsData.claims.sub as string;
+    const userId = userData.user.id;
 
     const admin = createClient(SUPABASE_URL, SERVICE_KEY);
 
@@ -62,17 +65,17 @@ Deno.serve(async (req) => {
       _role: 'admin',
     });
     if (roleErr || !isAdmin) {
-      return new Response(JSON.stringify({ error: 'Forbidden: admin role required' }), {
-        status: 403,
-        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-      });
+      return new Response(
+        JSON.stringify({ error: 'Forbidden: admin role required', detail: roleErr?.message }),
+        { status: 403, headers: { ...corsHeaders, 'Content-Type': 'application/json' } },
+      );
     }
 
     const tables: Record<string, unknown> = {};
     const errors: Record<string, string> = {};
 
     for (const t of TABLES) {
-      const { data, error } = await admin.from(t).select('*');
+      const { data, error } = await admin.from(t as any).select('*');
       if (error) {
         errors[t] = error.message;
       } else {
@@ -90,10 +93,7 @@ Deno.serve(async (req) => {
 
     return new Response(JSON.stringify(payload, null, 2), {
       status: 200,
-      headers: {
-        ...corsHeaders,
-        'Content-Type': 'application/json',
-      },
+      headers: { ...corsHeaders, 'Content-Type': 'application/json' },
     });
   } catch (e: any) {
     console.error('export error', e);
