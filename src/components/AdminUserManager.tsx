@@ -26,10 +26,32 @@ export const AdminUserManager = () => {
   const handleExport = async () => {
     try {
       setIsExporting(true);
-      const { data, error } = await supabase.functions.invoke('admin-export-data');
-      if (error) throw error;
 
-      const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+      const { data: sessionData } = await supabase.auth.getSession();
+      const token = sessionData?.session?.access_token;
+      if (!token) {
+        throw new Error("Nicht eingeloggt. Bitte erneut anmelden.");
+      }
+
+      const SUPABASE_URL = "https://lkcqrrekcxurunybwcyp.supabase.co";
+      const ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxrY3FycmVrY3h1cnVueWJ3Y3lwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTEzMjEwNjcsImV4cCI6MjA2Njg5NzA2N30.xFa8bWo6WRqyBfyhHoKG5XS-B160kf5-ncWihDyf54k";
+
+      const res = await fetch(`${SUPABASE_URL}/functions/v1/admin-export-data`, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'apikey': ANON_KEY,
+          'Content-Type': 'application/json',
+        },
+        body: '{}',
+      });
+
+      const text = await res.text();
+      if (!res.ok) {
+        throw new Error(`HTTP ${res.status}: ${text.slice(0, 300)}`);
+      }
+
+      const blob = new Blob([text], { type: 'application/json' });
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
