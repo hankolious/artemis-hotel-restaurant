@@ -36,7 +36,7 @@ export const AdminUserManager = () => {
       const SUPABASE_URL = "https://lkcqrrekcxurunybwcyp.supabase.co";
       const ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxrY3FycmVrY3h1cnVueWJ3Y3lwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTEzMjEwNjcsImV4cCI6MjA2Njg5NzA2N30.xFa8bWo6WRqyBfyhHoKG5XS-B160kf5-ncWihDyf54k";
 
-      const res = await fetch(`${SUPABASE_URL}/functions/v1/admin-export-data`, {
+      const res = await fetch(`${SUPABASE_URL}/functions/v1/export-all-data`, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`,
