@@ -28,32 +28,46 @@ export const AdminUserManager = () => {
       setIsExporting(true);
 
       const { data: sessionData } = await supabase.auth.getSession();
-      const token = sessionData?.session?.access_token;
-      if (!token) {
+      if (!sessionData?.session) {
         throw new Error("Nicht eingeloggt. Bitte erneut anmelden.");
       }
 
-      const SUPABASE_URL = "https://lkcqrrekcxurunybwcyp.supabase.co";
-      const ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxrY3FycmVrY3h1cnVueWJ3Y3lwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTEzMjEwNjcsImV4cCI6MjA2Njg5NzA2N30.xFa8bWo6WRqyBfyhHoKG5XS-B160kf5-ncWihDyf54k";
+      const TABLES = [
+        "menu_items",
+        "hotel_rooms",
+        "guest_reviews",
+        "restaurant_images",
+        "restaurant_info",
+        "special_events",
+        "website_settings",
+        "profiles",
+        "user_roles",
+      ] as const;
 
-      const res = await fetch(`${SUPABASE_URL}/functions/v1/export-all-data`, {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${token}`,
-          'apikey': ANON_KEY,
-          'Content-Type': 'application/json',
-        },
-        body: '{}',
-      });
+      const tables: Record<string, unknown> = {};
+      const errors: Record<string, string> = {};
 
-      const text = await res.text();
-      if (!res.ok) {
-        throw new Error(`HTTP ${res.status}: ${text.slice(0, 300)}`);
+      for (const t of TABLES) {
+        const { data, error } = await supabase.from(t as any).select("*");
+        if (error) {
+          errors[t] = error.message;
+          console.warn(`Export: ${t} failed`, error);
+        } else {
+          tables[t] = data ?? [];
+        }
       }
 
-      const blob = new Blob([text], { type: 'application/json' });
+      const payload = {
+        exported_at: new Date().toISOString(),
+        exported_by: sessionData.session.user.id,
+        project: "artemis",
+        tables,
+        errors: Object.keys(errors).length ? errors : undefined,
+      };
+
+      const blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" });
       const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
+      const a = document.createElement("a");
       a.href = url;
       const date = new Date().toISOString().slice(0, 10);
       a.download = `artemis-export-${date}.json`;
@@ -64,10 +78,12 @@ export const AdminUserManager = () => {
 
       toast({
         title: "Export erfolgreich",
-        description: "Die JSON-Datei mit allen Daten wurde heruntergeladen.",
+        description: Object.keys(errors).length
+          ? `Heruntergeladen. ${Object.keys(errors).length} Tabelle(n) hatten Fehler (siehe Konsole).`
+          : "Die JSON-Datei mit allen Daten wurde heruntergeladen.",
       });
     } catch (e: any) {
-      console.error('Export error:', e);
+      console.error("Export error:", e);
       toast({
         title: "Export fehlgeschlagen",
         description: e?.message ?? "Unbekannter Fehler beim Export.",
