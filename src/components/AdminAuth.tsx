@@ -105,6 +105,27 @@ export const AdminAuth = ({ onAuthenticated, onClose }: AdminAuthProps) => {
           >
             {isLoading ? "Anmeldung..." : "Anmelden"}
           </Button>
+          <Button
+            type="button"
+            variant="link"
+            className="w-full text-blue-700 text-sm h-auto p-0"
+            onClick={async () => {
+              if (!email) {
+                toast({ title: "E-Mail erforderlich", description: "Bitte E-Mail eingeben.", variant: "destructive" });
+                return;
+              }
+              const { error } = await supabase.auth.resetPasswordForEmail(email, {
+                redirectTo: `${window.location.origin}/reset-password`,
+              });
+              if (error) {
+                toast({ title: "Fehler", description: error.message, variant: "destructive" });
+              } else {
+                toast({ title: "E-Mail gesendet", description: "Prüfe dein Postfach für den Reset-Link." });
+              }
+            }}
+          >
+            Passwort vergessen?
+          </Button>
         </form>
       </CardContent>
     </Card>
