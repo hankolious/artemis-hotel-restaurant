@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
+import { PasswordInput } from "@/components/ui/password-input";
 
 const ResetPassword = () => {
   const [password, setPassword] = useState("");
@@ -70,11 +70,11 @@ const ResetPassword = () => {
               <form onSubmit={handleSubmit} className="space-y-3">
                 <div className="space-y-1">
                   <Label htmlFor="pw">Neues Passwort</Label>
-                  <Input id="pw" type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
+                  <PasswordInput id="pw" value={password} onChange={(e) => setPassword(e.target.value)} required />
                 </div>
                 <div className="space-y-1">
                   <Label htmlFor="pw2">Passwort bestätigen</Label>
-                  <Input id="pw2" type="password" value={confirm} onChange={(e) => setConfirm(e.target.value)} required />
+                  <PasswordInput id="pw2" value={confirm} onChange={(e) => setConfirm(e.target.value)} required />
                 </div>
                 <Button type="submit" className="w-full bg-blue-600 hover:bg-blue-700" disabled={isLoading}>
                   {isLoading ? "Speichere..." : "Passwort speichern"}

@@ -7,6 +7,9 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { LogIn, X } from "lucide-react";
+import { PasswordInput } from "@/components/ui/password-input";
+
+const PROD_URL = "https://hotelrestaurant-artemis.com";
 
 interface AdminAuthProps {
   onAuthenticated: () => void;
@@ -89,9 +92,8 @@ export const AdminAuth = ({ onAuthenticated, onClose }: AdminAuthProps) => {
           </div>
           <div className="space-y-1">
             <Label htmlFor="password" className="text-sm">Passwort</Label>
-            <Input
+            <PasswordInput
               id="password"
-              type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
@@ -115,7 +117,7 @@ export const AdminAuth = ({ onAuthenticated, onClose }: AdminAuthProps) => {
                 return;
               }
               const { error } = await supabase.auth.resetPasswordForEmail(email, {
-                redirectTo: `${window.location.origin}/reset-password`,
+                redirectTo: `${PROD_URL}/reset-password`,
               });
               if (error) {
                 toast({ title: "Fehler", description: error.message, variant: "destructive" });
