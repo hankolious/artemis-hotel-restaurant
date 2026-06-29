@@ -1,1 +1,10 @@
-project_id = "qajpxopfexgjrjetvffm"
+project_id = "lkcqrrekcxurunybwcyp"
+
+[auth]
+site_url = "https://hotelrestaurant-artemis.com"
+additional_redirect_urls = [
+  "https://hotelrestaurant-artemis.com",
+  "https://hotelrestaurant-artemis.com/reset-password",
+  "https://artemis-hotel-restaurant.lovable.app",
+  "https://artemis-hotel-restaurant.lovable.app/reset-password"
+]
