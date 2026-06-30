@@ -14,16 +14,311 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      guest_reviews: {
+        Row: {
+          created_at: string
+          email: string | null
+          guest_name: string
+          id: string
+          image_url: string | null
+          is_approved: boolean | null
+          rating: number
+          review_text: string
+        }
+        Insert: {
+          created_at?: string
+          email?: string | null
+          guest_name: string
+          id?: string
+          image_url?: string | null
+          is_approved?: boolean | null
+          rating: number
+          review_text: string
+        }
+        Update: {
+          created_at?: string
+          email?: string | null
+          guest_name?: string
+          id?: string
+          image_url?: string | null
+          is_approved?: boolean | null
+          rating?: number
+          review_text?: string
+        }
+        Relationships: []
+      }
+      hotel_rooms: {
+        Row: {
+          created_at: string
+          description: string | null
+          id: string
+          is_available: boolean | null
+          price: number
+          room_type: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          is_available?: boolean | null
+          price: number
+          room_type: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          is_available?: boolean | null
+          price?: number
+          room_type?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      menu_items: {
+        Row: {
+          additional_info: string | null
+          alcohol_percentage: string | null
+          category: string
+          created_at: string
+          description: string | null
+          id: string
+          is_available: boolean | null
+          name: string
+          price: number
+          sort_order: number | null
+          updated_at: string
+          volume: string | null
+        }
+        Insert: {
+          additional_info?: string | null
+          alcohol_percentage?: string | null
+          category: string
+          created_at?: string
+          description?: string | null
+          id?: string
+          is_available?: boolean | null
+          name: string
+          price: number
+          sort_order?: number | null
+          updated_at?: string
+          volume?: string | null
+        }
+        Update: {
+          additional_info?: string | null
+          alcohol_percentage?: string | null
+          category?: string
+          created_at?: string
+          description?: string | null
+          id?: string
+          is_available?: boolean | null
+          name?: string
+          price?: number
+          sort_order?: number | null
+          updated_at?: string
+          volume?: string | null
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          created_at: string
+          email: string | null
+          full_name: string | null
+          id: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          email?: string | null
+          full_name?: string | null
+          id: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          email?: string | null
+          full_name?: string | null
+          id?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      restaurant_images: {
+        Row: {
+          caption: string | null
+          category: string | null
+          created_at: string
+          id: string
+          image_url: string
+          is_active: boolean | null
+          uploaded_by: string | null
+        }
+        Insert: {
+          caption?: string | null
+          category?: string | null
+          created_at?: string
+          id?: string
+          image_url: string
+          is_active?: boolean | null
+          uploaded_by?: string | null
+        }
+        Update: {
+          caption?: string | null
+          category?: string | null
+          created_at?: string
+          id?: string
+          image_url?: string
+          is_active?: boolean | null
+          uploaded_by?: string | null
+        }
+        Relationships: []
+      }
+      restaurant_info: {
+        Row: {
+          content: string
+          id: string
+          section: string
+          updated_at: string
+        }
+        Insert: {
+          content: string
+          id?: string
+          section: string
+          updated_at?: string
+        }
+        Update: {
+          content?: string
+          id?: string
+          section?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      special_events: {
+        Row: {
+          booking_phone: string | null
+          created_at: string
+          current_participants: number | null
+          description: string | null
+          end_time: string | null
+          event_date: string | null
+          id: string
+          image_url: string | null
+          is_active: boolean | null
+          max_participants: number | null
+          price: number | null
+          requires_booking: boolean | null
+          start_time: string | null
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          booking_phone?: string | null
+          created_at?: string
+          current_participants?: number | null
+          description?: string | null
+          end_time?: string | null
+          event_date?: string | null
+          id?: string
+          image_url?: string | null
+          is_active?: boolean | null
+          max_participants?: number | null
+          price?: number | null
+          requires_booking?: boolean | null
+          start_time?: string | null
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          booking_phone?: string | null
+          created_at?: string
+          current_participants?: number | null
+          description?: string | null
+          end_time?: string | null
+          event_date?: string | null
+          id?: string
+          image_url?: string | null
+          is_active?: boolean | null
+          max_participants?: number | null
+          price?: number | null
+          requires_booking?: boolean | null
+          start_time?: string | null
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      user_roles: {
+        Row: {
+          created_at: string
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
+      website_settings: {
+        Row: {
+          category: string
+          display_name: string
+          id: string
+          setting_key: string
+          setting_type: string
+          setting_value: string
+          updated_at: string
+        }
+        Insert: {
+          category?: string
+          display_name: string
+          id?: string
+          setting_key: string
+          setting_type?: string
+          setting_value: string
+          updated_at?: string
+        }
+        Update: {
+          category?: string
+          display_name?: string
+          id?: string
+          setting_key?: string
+          setting_type?: string
+          setting_value?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      add_admin_role: { Args: { _user_email: string }; Returns: boolean }
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
+      remove_admin_role: { Args: { _user_email: string }; Returns: boolean }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "admin" | "moderator" | "user"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +445,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["admin", "moderator", "user"],
+    },
   },
 } as const
