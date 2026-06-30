@@ -1,43 +1,51 @@
-## Problem
+# Datenbank-Wiederherstellung aus Backup
 
-1. **Reset-E-Mail enthält `localhost`-Link**: Beim Aufruf von `resetPasswordForEmail` wird aktuell `window.location.origin` als `redirectTo` mitgegeben. Wenn du den Login im Lovable Preview / lokal testest, ist das eine Sandbox- oder Localhost-URL. Zusätzlich nutzt Supabase Auth die in den Auth-Einstellungen hinterlegte **Site URL** als Default, wenn keine gültige Redirect-URL gewhitelistet ist — und genau die steht aktuell offenbar auf `localhost`.
+## Ausgangslage
+- Die App zeigt weiße/Standard-Farben, weil **alle Tabellen** aus der angeschlossenen Datenbank fehlen.
+- Konsole bestätigt: `PGRST205: Could not find the table 'public.website_settings'` (gilt analog für alle anderen Tabellen).
+- `src/integrations/supabase/client.ts` zeigt noch auf das **alte externe Supabase-Projekt**, während `.env` bereits auf ein **leeres Lovable Cloud Projekt** zeigt. Beide haben aktuell keine Nutzdaten.
+- Betroffen sind: `website_settings`, `menu_items`, `hotel_rooms`, `guest_reviews`, `special_events`, `restaurant_images`, `profiles`, `user_roles`.
 
-2. **Kein Augen-Toggle**: Die Passwortfelder im Admin-Login und auf der Reset-Seite sind reine `type="password"`-Inputs, ohne Möglichkeit das Passwort kurz anzuzeigen.
+## Vorgehen
 
-## Lösung
+### 1. Backup-Datei entgegennehmen
+Du lädst den vorhandenen Export (JSON aus dem Admin-Daten-Export, oder SQL-Dump) im Chat hoch. Ich prüfe Format und Vollständigkeit (welche Tabellen enthalten sind, wie viele Zeilen, ob die Spalten zum bisherigen Schema passen).
 
-### 1. Reset-Link auf Produktions-Domain zwingen
+### 2. Schema in Lovable Cloud neu anlegen
+Über eine Migration werden in der korrekten Reihenfolge angelegt:
+1. `app_role` Enum + `user_roles` Tabelle + `has_role()` Security-Definer-Funktion
+2. `profiles`
+3. `website_settings`
+4. `menu_items`
+5. `hotel_rooms`
+6. `restaurant_images`
+7. `special_events`
+8. `guest_reviews`
 
-Im `AdminAuth.tsx` den `redirectTo`-Parameter so anpassen, dass er **immer** auf die Live-Domain zeigt, egal von wo aus die Reset-Mail angefordert wird:
+Für jede Tabelle:
+- passende Spalten (aus `src/integrations/supabase/types.ts` rekonstruiert),
+- `GRANT` an `authenticated` / `service_role` (und `anon SELECT` nur für öffentlich lesbare Tabellen wie Menü, Zimmer, Bilder, veröffentlichte Bewertungen, Events, Settings),
+- `ENABLE ROW LEVEL SECURITY`,
+- RLS-Policies: öffentlicher Lesezugriff für Webseiten-Inhalte, Schreibzugriff nur für Admins via `has_role(auth.uid(),'admin')`,
+- `updated_at`-Trigger.
 
-```ts
-const PROD_URL = "https://hotelrestaurant-artemis.com";
-const redirectTo = `${PROD_URL}/reset-password`;
-```
+### 3. Client auf Lovable Cloud umstellen
+Sicherstellen, dass die App tatsächlich gegen die wiederhergestellte Cloud-DB läuft (richtige URL + Anon-Key). Falls `client.ts` noch das alte Projekt nutzt, wird es automatisch regeneriert sobald die Migration durchläuft.
 
-Damit landet der Link in der Mail garantiert auf der echten Seite und nicht mehr auf `localhost:xxxx`.
+### 4. Daten aus dem Backup importieren
+- JSON-Backup → ich konvertiere zu `INSERT`-Statements und spiele sie pro Tabelle ein (über das Insert-Tool, in der richtigen FK-Reihenfolge).
+- SQL-Dump → ich extrahiere nur die `INSERT`-Blöcke der relevanten Tabellen und spiele sie ein.
+- Wenn `website_settings` im Backup einen Beige-Wert für `background_color` enthält, ist deine ursprüngliche Hintergrundfarbe damit automatisch wieder da. Falls nicht, setze ich `background_color` explizit auf den Beige-Wert, den du nennst.
 
-**Zusätzlich nötig (du, im Cloud-Backend):** In den Auth-Einstellungen müssen:
-- **Site URL** = `https://hotelrestaurant-artemis.com`
-- **Additional Redirect URLs** = `https://hotelrestaurant-artemis.com/reset-password` (und ggf. die Lovable Preview-URL, falls du dort weiter testen willst)
+### 5. Admin-Zugang wiederherstellen
+- `aron68307@gmail.com` muss in `auth.users` existieren (einmal über „Registrieren" oder „Passwort vergessen" anlegen).
+- Danach Eintrag in `user_roles` mit Rolle `admin` setzen, damit du wieder ins Admin-Panel kommst.
 
-Sonst lehnt Supabase die Redirect-URL ab und fällt auf die (falsche) Site URL zurück. Ich erkläre dir nach dem Build, wo genau du das setzt.
+### 6. Verifizierung
+- `SELECT count(*)` pro Tabelle, um Zeilenanzahl mit dem Backup zu vergleichen.
+- App neu laden, prüfen: Hintergrund beige, Speisekarte/Hotel/Events/Bilder/Bewertungen sichtbar, Admin-Login funktioniert.
 
-### 2. Augen-Toggle für Passwort
-
-Eine kleine wiederverwendbare `PasswordInput`-Komponente erstellen (`src/components/ui/password-input.tsx`), die:
-- Standardmäßig `type="password"` rendert
-- Rechts im Input einen `Eye` / `EyeOff` Lucide-Icon-Button hat (kein Emoji, passt zur „Icons-only"-Regel)
-- Beim Klick zwischen sichtbar/unsichtbar umschaltet
-
-Diese Komponente dann einsetzen in:
-- `src/components/AdminAuth.tsx` (Passwort-Feld beim Login)
-- `src/pages/ResetPassword.tsx` (beide Felder: Neues Passwort + Bestätigen)
-
-## Geänderte / neue Dateien
-
-- **neu**: `src/components/ui/password-input.tsx`
-- **edit**: `src/components/AdminAuth.tsx` — Passwortfeld durch `PasswordInput` ersetzen, `redirectTo` auf Produktion festsetzen
-- **edit**: `src/pages/ResetPassword.tsx` — beide Passwortfelder durch `PasswordInput` ersetzen
-
-Keine Backend-/DB-Änderungen, keine Edge Functions.
+## Was ich von dir brauche
+1. **Die Backup-Datei** (Upload im Chat).
+2. Falls im Backup keine `website_settings` enthalten sind: den genauen **Beige-Hex-Code**, den du als Hintergrund hattest.
+3. Bestätigung, dass es ok ist, wenn die Passwörter der Admin-User **nicht** wiederhergestellt werden (Passwort-Hashes liegen in `auth.users` und sind im Daten-Export nicht enthalten — du setzt dein Passwort über „Passwort vergessen" einmal neu).
